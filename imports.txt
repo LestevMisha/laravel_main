@@ -6,5 +6,9 @@ php artisan vendor:publish --tag="telegram-config"
 
 
 for differ languages:
+composer require --dev laravel-lang/common
+composer require laravel-lang/locales
+composer require laravel-lang/json-fallback
+
 https://laravel-lang.com/installation.html#json_fallback
 https://github.com/Laravel-Lang/lang?tab=readme-ov-file

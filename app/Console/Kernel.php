@@ -12,6 +12,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
+        $schedule->command('app:decrease-left-days')->everyTenSeconds();
         // $schedule->command('inspire')->hourly();
     }
 

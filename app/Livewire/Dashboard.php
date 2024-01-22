@@ -13,7 +13,6 @@ class Dashboard extends Component
 {
     private $authService = null;
 
-
     public function __construct()
     {
         $this->authService = new AuthService();

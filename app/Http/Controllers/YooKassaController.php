@@ -24,7 +24,7 @@ class YooKassaController extends Controller
     }
 
     // --> YooKassa Callback for different states
-    public function callback()
+    public function callback(Request $request)
     {
         $source = file_get_contents("php://input");
         $requestBody = json_decode($source, true);
@@ -82,6 +82,22 @@ class YooKassaController extends Controller
 
                     // user + 30 days
                     $user = User::where("uuid", $transaction->uuid)->first();
+                    $user->days_left = (int)$user->days_left + 30;
+                    $user->save();
+                }
+                // handle recurrent payments
+                if ($metadata->isRecurrent) {
+                    $user = User::where("uuid", $metadata->uuid)->first();
+                    $transaction = UsersTransactions::create([
+                        "uuid" => $user->uuid,
+                        "yookassa_transaction_id" => $payment->id,
+                        "status" => "succeeded",
+                        "amount" => $payment->amount->value,
+                        "description" => $payment->description,
+                        "ip" => $request->ip(),
+                    ]);
+                    $transaction->payment_method_id = $payment->payment_method->id;
+                    $transaction->save();
                     $user->days_left = (int)$user->days_left + 30;
                     $user->save();
                 }
