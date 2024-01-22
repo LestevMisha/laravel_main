@@ -1,0 +1,10 @@
+composer require yoomoney/yookassa-sdk-php
+composer require livewire/livewire
+composer require irazasyed/telegram-bot-sdk
+php artisan vendor:publish --tag="telegram-config"
+
+
+
+for differ languages:
+https://laravel-lang.com/installation.html#json_fallback
+https://github.com/Laravel-Lang/lang?tab=readme-ov-file
