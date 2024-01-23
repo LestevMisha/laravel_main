@@ -10,6 +10,11 @@ class TelegramController extends Controller
     public function webhook()
     {
         $updates = Telegram::getWebhookUpdate();
+        // check if it's a primary chat
+        if ($updates['message']['chat']["title"] === config("services.telegram.primary_chat_title")) {
+            return;
+        }
+
         $new_user = $updates['message']['from'];
 
         // find user in db
