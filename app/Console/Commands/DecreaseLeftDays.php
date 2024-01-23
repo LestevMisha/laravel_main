@@ -44,37 +44,22 @@ class DecreaseLeftDays extends Command
         // Find users with 0 days_left to cick
         $usersWithZeroDaysLeft = User::where("days_left", "=", 0)->get();
 
-        Log::error("--------------- START ---------------");
-        Log::error(User::where("days_left", ">", 0)->get());
-        Log::error($usersWithZeroDaysLeft);
-        Log::error($usersWithOneDaysLeft);
-        Log::error("--------------- Well done ---------------");
 
         // 2. Step --1 day before cick-- try to make recurrent payment if user have enough balance
         if ($usersWithOneDaysLeft->count() > 0) {
             foreach ($usersWithOneDaysLeft as $user) {
                 // Retrieve user's uuid
-                $uuid = $user->first()->uuid;
+                $uuid = $user->uuid;
 
                 // Retrieve user's transaction information
-                $usersTransaction = UsersTransactions::where("uuid", $uuid);
+                $usersTransaction = UsersTransactions::where("uuid", $uuid)->first();
 
                 // Set payment method ID to 0 if not available
                 $payment_method_id = $usersTransaction->payment_method_id ?? 0;
 
-                // -------------------- Log payment method ID for debugging --------------------
-                Log::error("---1start---");
-                Log::error($user);
-                Log::error($uuid);
-                Log::error("---1end---");
-                Log::error("---1extra_start---");
-                Log::error($payment_method_id);
-                Log::error("---2extra_start---");
-                // --------------------  --------------------
-
                 // If payment method ID is 0, return without further processing
                 if ($payment_method_id === 0) {
-                    return;
+                    continue;
                 }
 
                 $authService->getClient()->createPayment(
@@ -104,10 +89,6 @@ class DecreaseLeftDays extends Command
                     $telegram_id = $user->telegram_id;
 
                     // check if empty
-
-                    Log::error("---2extra_start---");
-                    Log::error($telegram_id);
-                    Log::error("---3extra_start---");
                     if ($telegram_id === null) {
                         return;
                     }
@@ -118,16 +99,11 @@ class DecreaseLeftDays extends Command
                     ]);
 
                     foreach ($admins as $admin) {
-                        Log::error("---2start---");
-                        Log::error($admin);
-                        Log::error($admin["user"]);
-                        Log::error("---2end---");
                         if ($admin["user"]["id"] == $telegram_id) {
                             return;
                         }
                     }
 
-                    $user = $user->first();
                     // cick off user
                     Telegram::banChatMember([
                         'chat_id' => '-1002083241184',
