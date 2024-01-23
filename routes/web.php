@@ -7,6 +7,7 @@ use App\Livewire\Login;
 use App\Livewire\Register;
 use App\Livewire\Dashboard;
 use App\Livewire\Error;
+use App\Livewire\Index;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,9 +21,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::match(["POST", "GET"], '/', function () {
-    return view('welcome');
-})->name("welcome");
+Route::match(["POST", "GET"], '/', Index::class);
 
 Route::controller(TelegramController::class)->group(function () {
     $token = config("services.telegram.bot_token");

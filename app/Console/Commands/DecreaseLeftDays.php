@@ -39,8 +39,10 @@ class DecreaseLeftDays extends Command
         // Find users with 0 days_left to cick
         $usersWithZeroDaysLeft = User::where("days_left", "=", 0)->get();
 
+        // Log::error(User::where("days_left", ">", 0)->get());
         // Log::error($usersWithZeroDaysLeft);
         // Log::error($usersWithZeroDaysLeft->count());
+        // Log::error("--------------- Well done ---------------");
 
         // 1. Step --0 days left-- ban/cick off user
         if ($usersWithZeroDaysLeft->count() > 0) {
