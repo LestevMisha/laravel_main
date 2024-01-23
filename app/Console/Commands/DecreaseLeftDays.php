@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use Exception;
 use App\Models\User;
 use App\Services\AuthService;
 use Illuminate\Console\Command;
@@ -30,8 +31,12 @@ class DecreaseLeftDays extends Command
      */
     public function handle(AuthService $authService)
     {
+        // Retrieve set telegram group id
+        $telegram_group_id = config("services.telegram.group_id");
+
         // Decrement days_left for users with days_left greater than 0
         User::where("days_left", ">", 0)->decrement("days_left");
+        $this->info('Days subtracted successfully.');
 
         // Find users with 1 days_left
         $usersWithOneDaysLeft = User::where("days_left", "=", 1)->get();
@@ -39,32 +44,39 @@ class DecreaseLeftDays extends Command
         // Find users with 0 days_left to cick
         $usersWithZeroDaysLeft = User::where("days_left", "=", 0)->get();
 
-        // Log::error(User::where("days_left", ">", 0)->get());
-        // Log::error($usersWithZeroDaysLeft);
-        // Log::error($usersWithZeroDaysLeft->count());
-        // Log::error("--------------- Well done ---------------");
-
-        // 1. Step --0 days left-- ban/cick off user
-        if ($usersWithZeroDaysLeft->count() > 0) {
-            foreach ($usersWithZeroDaysLeft as $user) {
-                $user = $user->first();
-                $telegram_id = $user->telegram_id;
-                // cick off user
-                Telegram::banChatMember([
-                    'chat_id' => '-1002083241184',
-                    'user_id' => $telegram_id,
-                ]);
-            }
-        }
+        Log::error("--------------- START ---------------");
+        Log::error(User::where("days_left", ">", 0)->get());
+        Log::error($usersWithZeroDaysLeft);
+        Log::error($usersWithOneDaysLeft);
+        Log::error("--------------- Well done ---------------");
 
         // 2. Step --1 day before cick-- try to make recurrent payment if user have enough balance
         if ($usersWithOneDaysLeft->count() > 0) {
             foreach ($usersWithOneDaysLeft as $user) {
-                $user = $user->first();
-                $uuid = $user->uuid;
+                // Retrieve user's uuid
+                $uuid = $user->first()->uuid;
 
-                // Apply payment logic for each user with zero days_left
-                $payment_method_id = UsersTransactions::where("uuid", $uuid)->first()->payment_method_id;
+                // Retrieve user's transaction information
+                $usersTransaction = UsersTransactions::where("uuid", $uuid);
+
+                // Set payment method ID to 0 if not available
+                $payment_method_id = $usersTransaction->payment_method_id ?? 0;
+
+                // -------------------- Log payment method ID for debugging --------------------
+                Log::error("---1start---");
+                Log::error($user);
+                Log::error($uuid);
+                Log::error("---1end---");
+                Log::error("---1extra_start---");
+                Log::error($payment_method_id);
+                Log::error("---2extra_start---");
+                // --------------------  --------------------
+
+                // If payment method ID is 0, return without further processing
+                if ($payment_method_id === 0) {
+                    return;
+                }
+
                 $authService->getClient()->createPayment(
                     array(
                         'amount' => array(
@@ -85,6 +97,46 @@ class DecreaseLeftDays extends Command
             $this->info('Payment applied for users with zero days left.');
         }
 
-        $this->info('Days subtracted successfully.');
+        // 1. Step --0 days left-- ban/cick off user
+        if ($usersWithZeroDaysLeft->count() > 0) {
+            foreach ($usersWithZeroDaysLeft as $user) {
+                try {
+                    $telegram_id = $user->telegram_id;
+
+                    // check if empty
+
+                    Log::error("---2extra_start---");
+                    Log::error($telegram_id);
+                    Log::error("---3extra_start---");
+                    if ($telegram_id === null) {
+                        return;
+                    }
+
+                    // check if user is admin
+                    $admins = Telegram::getChatAdministrators([
+                        'chat_id' => $telegram_group_id,
+                    ]);
+
+                    foreach ($admins as $admin) {
+                        Log::error("---2start---");
+                        Log::error($admin);
+                        Log::error($admin["user"]);
+                        Log::error("---2end---");
+                        if ($admin["user"]["id"] == $telegram_id) {
+                            return;
+                        }
+                    }
+
+                    $user = $user->first();
+                    // cick off user
+                    Telegram::banChatMember([
+                        'chat_id' => '-1002083241184',
+                        'user_id' => $telegram_id,
+                    ]);
+                } catch (Exception $error) {
+                    Log::error($error);
+                }
+            }
+        }
     }
 }

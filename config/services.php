@@ -39,5 +39,6 @@ return [
     'telegram' => [
         'bot_token' => env('TELEGRAM_BOT_TOKEN', null),
         'webhook_url' => env('TELEGRAM_WEBHOOK_URL', null),
+        'group_id' => env('TELEGRAM_GROUP_ID', null),
     ],
 ];
