@@ -56,7 +56,7 @@ class TelegramController extends Controller
         Telegram::removeWebhook();
     }
 
-    function isAdmin(int $target_id, string $chat_id)
+    function isAdmin(string $chat_id, int $target_id)
     {
         // check if user is admin
         $admins = Telegram::getChatAdministrators([
