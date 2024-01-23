@@ -87,6 +87,7 @@ class YooKassaController extends Controller
                 }
                 // handle recurrent payments
                 if ($metadata->isRecurrent) {
+                    // add to database
                     $user = User::where("uuid", $metadata->uuid)->first();
                     $transaction = UsersTransactions::create([
                         "uuid" => $user->uuid,
@@ -100,6 +101,10 @@ class YooKassaController extends Controller
                     $transaction->save();
                     $user->days_left = (int)$user->days_left + 30;
                     $user->save();
+
+                    // unbun user
+                    $tg = new TelegramController();
+                    $tg->unbanChatMember(config("services.telegram.group_id"), $user->telegram_id);
                 }
             }
         }

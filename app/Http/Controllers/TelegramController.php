@@ -21,7 +21,7 @@ class TelegramController extends Controller
             if ($user->is_telegram_id_verified === 1) {
                 Telegram::sendMessage([
                     'chat_id' => $updates["message"]["chat"]["id"],
-                    'text' => "Вы уже успешно верефицировали свой аккаунт 😃\. Ваш профиль здесь __https://kaxfgu\-ip\-73\-37\-205\-89\.tunnelmole\.net/dashboard__\.",
+                    'text' => "Вы уже успешно верефицировали свой аккаунт 😃\. Ваш профиль здесь __" . config("website.url") . "dashboard__\.",
                     'parse_mode' => 'MarkdownV2'
                 ]);
                 return "succeeded_again";
@@ -54,5 +54,37 @@ class TelegramController extends Controller
     public function removeWebhook()
     {
         Telegram::removeWebhook();
+    }
+
+    function isAdmin(int $target_id, string $chat_id)
+    {
+        // check if user is admin
+        $admins = Telegram::getChatAdministrators([
+            'chat_id' => $chat_id,
+        ]);
+
+        foreach ($admins as $admin) {
+            if ($admin["user"]["id"] == $target_id) {
+                return 1;
+            }
+        }
+        return 0;
+    }
+
+    public function banChatMember(int $chat_id, string $user_id)
+    {
+        Telegram::banChatMember([
+            'user_id' => $user_id,
+            'chat_id' => $chat_id,
+        ]);
+    }
+
+    public function unbanChatMember(string $chat_id, int $user_id)
+    {
+        Telegram::unbanChatMember([
+            'chat_id' => $chat_id,
+            'user_id' => $user_id,
+            'only_if_banned' => true,
+        ]);
     }
 }

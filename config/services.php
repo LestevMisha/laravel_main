@@ -41,4 +41,8 @@ return [
         'webhook_url' => env('TELEGRAM_WEBHOOK_URL', null),
         'group_id' => env('TELEGRAM_GROUP_ID', null),
     ],
+
+    'website' => [
+        'url' => env('MAIN_WEBSITE_URL', null),
+    ],
 ];
