@@ -71,11 +71,11 @@ class TelegramController extends Controller
         return 0;
     }
 
-    public function banChatMember(int $chat_id, string $user_id)
+    public function banChatMember(string $chat_id, int $user_id)
     {
         Telegram::banChatMember([
-            'user_id' => $user_id,
             'chat_id' => $chat_id,
+            'user_id' => $user_id,
         ]);
     }
 

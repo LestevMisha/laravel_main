@@ -93,16 +93,16 @@ class DecreaseLeftDays extends Command
 
                     // 1. check if user is not verified
                     if ($telegram_id === null) {
-                        return;
+                        continue;
                     }
 
                     // 2. check if iser is admin
-                    if ($tg->isAdmin((int)$telegram_id, (string)$telegram_group_id)) {
-                        return;
+                    if ($tg->isAdmin((string)$telegram_group_id, (int)$telegram_id)) {
+                        continue;
                     }
 
                     // if all checks are passed, kick user out
-                    $tg->banChatMember((int)$telegram_id, (string)$telegram_group_id);
+                    $tg->banChatMember((string)$telegram_group_id, (int)$telegram_id);
                 } catch (Exception $error) {
                     Log::error($error);
                 }
