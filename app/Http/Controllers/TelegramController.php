@@ -10,12 +10,14 @@ class TelegramController extends Controller
     public function webhook()
     {
         $updates = Telegram::getWebhookUpdate();
-        // check if it's a primary chat
-        if ($updates['message']['chat']["title"] === config("services.telegram.primary_chat_title")) {
+
+        // check if it's a primary chat - restrict if so.
+        if (($updates['message']['chat']["title"] ?? null) === config("services.telegram.primary_chat_title")) {
             return;
         }
 
         $new_user = $updates['message']['from'];
+        $url = str_replace(['-', '.'], ['\-', '\.'], config("services.website.url") . "dashboard");
 
         // find user in db
         $username = $new_user['username'];
@@ -26,7 +28,7 @@ class TelegramController extends Controller
             if ($user->is_telegram_id_verified === 1) {
                 Telegram::sendMessage([
                     'chat_id' => $updates["message"]["chat"]["id"],
-                    'text' => "Вы уже успешно верефицировали свой аккаунт 😃\. Ваш профиль здесь __" . config("website.url") . "dashboard__\.",
+                    'text' => "Вы уже успешно верефицировали свой аккаунт 😃\. Ваш профиль здесь __{$url}__\.",
                     'parse_mode' => 'MarkdownV2'
                 ]);
                 return "succeeded_again";
@@ -38,7 +40,7 @@ class TelegramController extends Controller
 
             Telegram::sendMessage([
                 'chat_id' => $updates["message"]["chat"]["id"],
-                'text' => '*Спасибо вы успешно активировали свой аккаунт*\! Можете перейти по ссылке __https://xd4rps\-ip\-73\-37\-205\-89\.tunnelmole\.net/dashboard__\, либо перезагрузите страницу\.',
+                'text' => "*Спасибо вы успешно активировали свой аккаунт*\! Можете перейти по ссылке __{$url}__\, либо перезагрузите страницу\.",
                 'parse_mode' => 'MarkdownV2'
             ]);
             return "succeeded";
@@ -53,7 +55,10 @@ class TelegramController extends Controller
 
     public function setWebhook()
     {
-        Telegram::setWebhook(["url" => config("services.telegram.webhook_url")]);
+        $url = config("services.website.url") . config("services.telegram.bot_token") . "/tgwebhook";
+        Telegram::setWebhook([
+            "url" => $url
+        ]);
     }
 
     public function removeWebhook()
