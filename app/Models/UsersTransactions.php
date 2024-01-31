@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class UsersTransactions extends Model
 {
     use HasFactory;
-    protected $fillable = ['uuid', 'yookassa_transaction_id', 'status', 'amount', 'description', 'ip'];
+    protected $fillable = ['email', 'telegram_id', 'uuid', 'yookassa_transaction_id', 'status', 'referral_id', 'amount', 'description', 'ip'];
 }

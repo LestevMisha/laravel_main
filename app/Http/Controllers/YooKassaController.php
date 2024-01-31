@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Services\AuthService;
+use App\Services\ModelService;
 use App\Models\UsersTransactions;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
-use App\Models\ReferredUsersTransactions;
 use YooKassa\Model\Notification\NotificationCanceled;
 use YooKassa\Model\Notification\NotificationEventType;
 use YooKassa\Model\Notification\NotificationSucceeded;
@@ -22,6 +23,24 @@ class YooKassaController extends Controller
     {
         $this->authService = new AuthService();
     }
+
+    public function pay_3000(Request $request)
+    {
+        // create transaction
+        $user = Auth::user();
+        $modelService = new ModelService();
+        $transactionUrl = $modelService->createTransaction(
+            $user->uuid,
+            $user->email,
+            $user->telegram_id,
+            $request->ip(),
+            3000,
+            "Месячная оплата",
+        );
+
+        return redirect()->away($transactionUrl);
+    }
+
 
     // --> YooKassa Callback for different states
     public function callback(Request $request)
@@ -58,8 +77,7 @@ class YooKassaController extends Controller
             $metadata = (object)$payment->metadata;
             if (isset($metadata->transaction_id)) {
                 $transactionId = (int)$metadata->transaction_id;
-                $table = $this->getTable($metadata->table);
-                $transaction = $table::find($transactionId);
+                $transaction = UsersTransactions::find($transactionId);
 
                 if ($transaction) {
                     $transaction->status = "canceled";
@@ -72,10 +90,12 @@ class YooKassaController extends Controller
         if (isset($payment->status) && $payment->status === "succeeded") {
             if ((bool)$payment->paid === true) {
                 $metadata = (object)$payment->metadata;
+                // tg instance
+                $tg = new TelegramController();
+
                 if (isset($metadata->transaction_id)) {
                     $transactionId =  (int)$metadata->transaction_id;
-                    $table = $this->getTable($metadata->table);
-                    $transaction = $table::find($transactionId);
+                    $transaction = UsersTransactions::find($transactionId);
                     $transaction->status = "succeeded";
                     $transaction->payment_method_id = $payment->payment_method->id;
                     $transaction->save();
@@ -84,6 +104,8 @@ class YooKassaController extends Controller
                     $user = User::where("uuid", $transaction->uuid)->first();
                     $user->days_left = (int)$user->days_left + 30;
                     $user->save();
+                    // unban if banned
+                    $tg->unbanChatMember(config("services.telegram.group_id"), $user->telegram_id);
                 }
                 // handle recurrent payments
                 if ($metadata->isRecurrent) {
@@ -101,9 +123,7 @@ class YooKassaController extends Controller
                     $transaction->save();
                     $user->days_left = (int)$user->days_left + 30;
                     $user->save();
-
-                    // unbun user
-                    $tg = new TelegramController();
+                    // unban if banned
                     $tg->unbanChatMember(config("services.telegram.group_id"), $user->telegram_id);
                 }
             }
@@ -124,12 +144,13 @@ class YooKassaController extends Controller
             }
         }
 
-        // make sure that user is registered
-        $response = $this->authService->checkUserState("register", "confirmation");
-        if ($response === "confirmation") {
-            return redirect()->route($response);
-        } elseif ($response === "register") {
-            return redirect()->route($response);
+        // make sure that user is logged in
+        if (!Auth::check()) {
+            return redirect()->route("login");
+        }
+        // make sure that user has verified telegram_id
+        if (!Auth::user()->telegram_id) {
+            return redirect()->route("confirmation");
         }
 
         // get referral data
@@ -145,62 +166,33 @@ class YooKassaController extends Controller
         if (isset($referral_id)) {
 
             // check if referral id is real
-            $user = User::where("referral_id", $referral_id)->first();
-            if (isset($user->id)) {
-                // add to database + create request to yookassa
-                $amount = 10000;
-                $descriprtion = "Marathon Payment 10K";
+            if (User::where("referral_id", $referral_id)->first()) {
 
-                $transaction = ReferredUsersTransactions::create([
-                    "email" => $request->user()?->email,
-                    "telegram_id" => $request->user()?->telegram_id,
-                    "uuid" => $request->user()?->uuid,
-                    "referral_id" => $referral_id,
-                    "amount" => $amount,
-                    "description" => $descriprtion,
-                    "ip" => $request->ip(),
-                ]);
+                // create transaction
+                $user = Auth::user();
+                $modelService = new ModelService();
 
                 // make sure that user isn't a payer already (in order to don't change his referred_status on 1)
-                if (!ReferredUsersTransactions::where('uuid', $request->user()->uuid)->exists() || !UsersTransactions::where('uuid', $request->user()->uuid)->exists()) {
-                    // set User as referred
-                    $user = User::where("uuid", $request->user()?->uuid)->first();
-                    $user->is_referred = 1;
-                    $user->save();
-                }
-
-
-                if ($transaction) {
-                    $payment = $this->authService->createPayment($amount, $descriprtion, [
-                        "transaction_id" => $transaction->id,
-                        "table" => "ReferredUsersTransactions",
-                    ]);
-                    $transaction->yookassa_transaction_id = $payment->id;
-                    $transaction->status = $payment->status;
-                    $transaction->save();
-
+                if (!UsersTransactions::where('uuid', $user->uuid)->exists()) {
+                    $transactionUrl = $modelService->createTransaction(
+                        $user->uuid,
+                        $user->email,
+                        $user->telegram_id,
+                        $request->ip(),
+                        10000,
+                        "Реферальная оплата",
+                        $referral_id,
+                    );
                     // set referral id as expired, since user created request
                     Cache::put("referral_id", ["link" => $referral_id, "isExpired" => "true"]);
-                    return redirect()->away($payment->getConfirmation()->getConfirmationUrl());
+                    return redirect()->away($transactionUrl);
                 }
+                return redirect()->route("error")->withErrors(["error" => "You had some transactions already"]);
             } else {
                 return redirect()->route("error")->withErrors(["error" => "Your referral id is incorrect"]);
             }
         } else {
             return redirect()->route("error")->withErrors(["error" => "Your session is gone, please try again later"]);
         }
-    }
-
-    /* ------------- PRIVATE ------------- */
-    // Private Get Table From String
-    private function getTable($str)
-    {
-        $table = null;
-        if ($str === "UsersTransactions") {
-            $table = UsersTransactions::class;
-        } elseif ($str === "ReferredUsersTransactions") {
-            $table = ReferredUsersTransactions::class;
-        }
-        return $table;
     }
 }

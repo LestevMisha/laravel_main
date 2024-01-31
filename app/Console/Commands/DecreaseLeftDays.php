@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Http\Controllers\TelegramController;
+use App\Models\ReferredUsersTransactions;
 use Exception;
 use App\Models\User;
 use App\Services\AuthService;
@@ -52,10 +53,10 @@ class DecreaseLeftDays extends Command
                 $usersTransaction = UsersTransactions::where("uuid", $uuid)->first();
 
                 // Set payment method ID to 0 if not available
-                $payment_method_id = $usersTransaction->payment_method_id ?? 0;
+                $payment_method_id = $usersTransaction->payment_method_id ?? null;
 
                 // If payment method ID is 0, return without further processing
-                if ($payment_method_id === 0) {
+                if ($payment_method_id === null) {
                     continue;
                 }
 

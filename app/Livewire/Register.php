@@ -2,51 +2,88 @@
 
 namespace App\Livewire;
 
-use App\Models\User;
+use Exception;
 use Livewire\Component;
-use Illuminate\Support\Str;
+use App\Services\AuthService;
+
+use App\Services\ModelService;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
 
 class Register extends Component
 {
-    public $password_confirmation = "";
+    public $password;
+    public $password_confirmation;
+    public $remember = false;
+
+    // validate attributes for validation
     #[Validate("required|string|min:2|max:25")]
     public $name = "";
+
     #[Validate("required|min:4|max:50|email|unique:users")]
     public $email = "";
+
     #[Validate("required|min:1|max:50|unique:users")]
     public $telegram_username = "";
-    #[Validate("required|min:8|confirmed")]
-    public $password = "";
+
 
     public function store()
     {
+        // validate the fields
         $this->validate();
 
-        User::create([
-            'name' => $this->name,
-            'telegram_username' => $this->telegram_username,
-            'uuid' => Str::uuid()->toString(),
-            'referral_id' => Str::uuid()->toString(),
-            'email' => $this->email,
-            'password' => Hash::make($this->password)
+        // confirm password
+        $this->validate([
+            'password' => "required|min:8|confirmed"
         ]);
 
-        $credentials = $this->only('email', 'password');
-        Auth::attempt($credentials);
-        session()->regenerate();
+        try {
+            // create a new user
+            $modelService = new ModelService();
+            $user = $modelService->createUser(
+                $this->name,
+                $this->email,
+                $this->telegram_username,
+                $this->password,
+            );
 
-        return redirect()->route("confirmation");
+            // send verification letter
+            event(new Registered($user));
+
+
+            // authentificate user
+            $authService = new AuthService();
+            return $authService->authenticateUser(
+                $this->email,
+                $this->password,
+                $this->remember,
+                $this,
+            );
+        } catch (Exception $e) {
+            $error = "Пожалуйста проверьте интернет соединение. Попробуйте позже. Если ничего не помогло напишите нам в поддержку." . " Ошибка сервера: " . $e->getMessage();
+            $this->addError("server", $error);
+        }
     }
+
 
     public function mount()
     {
-        if (Auth::check() && Auth::user()->is_telegram_id_verified === 1) {
+        /*
+        In case is user want to insert changes
+        1. Telegram must be unverified
+        2. Must be logged in
+        */
+        if (Auth::check() && Auth::user()->telegram_id === null) {
+            $modelService = new ModelService();
+            $modelService->deleteUser(Auth::user()->email);
+        }
+
+        if (Auth::check() && Auth::user()->telegram_id !== null) {
             return redirect()->route("dashboard");
         }
     }
+
 
     public function render()
     {

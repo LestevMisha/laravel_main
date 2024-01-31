@@ -1,3 +1,5 @@
+composer require laravel-validation-rules/credit-card
+composer require igorescobar/jquery-mask-plugin
 composer require yoomoney/yookassa-sdk-php
 composer require livewire/livewire
 composer require irazasyed/telegram-bot-sdk

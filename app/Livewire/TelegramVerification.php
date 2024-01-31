@@ -5,12 +5,12 @@ namespace App\Livewire;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 
-class Confirmation extends Component
+class TelegramVerification extends Component
 {
 
     public function mount()
     {
-        if (Auth::check() && Auth::user()->is_telegram_id_verified === 1) {
+        if (Auth::check() && Auth::user()->telegram_id !== null) {
             return redirect()->route("dashboard");
         }
         if (!Auth::check()) {
@@ -20,6 +20,6 @@ class Confirmation extends Component
 
     public function render()
     {
-        return view('livewire.confirmation');
+        return view('livewire.telegram-verification');
     }
 }

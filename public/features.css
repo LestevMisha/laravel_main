@@ -74,3 +74,94 @@
     background-position: center center;
     background-size: cover;
 }
+
+.link-secondary {
+    pointer-events: none !important;
+}
+
+.b-img {
+    width: 4em;
+    height: 4em;
+    background-color: #000;
+    border-radius: 1em;
+}
+
+#copyTarget {
+    z-index: 1 !important;
+    color: #747474;
+}
+
+.copied {
+    opacity: 1;
+    position: absolute;
+    left: 1em;
+    top: 50%;
+    transform: translate(0px, -70%);
+}
+
+#summary {
+    line-height: 1.5;
+}
+
+#collapseSummary {
+    padding: 0;
+    margin: 0;
+}
+
+#summary p.collapse:not(.show) {
+    height: 42px !important;
+    overflow: hidden;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+#summary p.collapsing {
+    min-height: 42px !important;
+}
+
+#summary a.collapsed:after {
+    content: '+ Читать Больше';
+}
+
+#summary a:not(.collapsed):after {
+    content: '- Скрыть';
+}
+
+.show {
+    display: block;
+    opacity: 1;
+}
+
+.hblock {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+
+.vblock {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.vblock.vblock_gap_1em {
+    gap: 1em;
+}
+
+.vblock.vblock_gap_0\.5em {
+    gap: 0.5em;
+}
+
+.vblock.vblock_v-1 {
+    gap: 0.5em;
+    border: 0.1em solid #ebebeb;
+    border-radius: 1em;
+    padding: 1em;
+}
+
+.container_v-1 {
+    max-width: 40em;
+}

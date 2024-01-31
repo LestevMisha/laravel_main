@@ -25,7 +25,7 @@ class TelegramController extends Controller
 
         // add user's id if it's correct
         if (isset($user->telegram_username)) {
-            if ($user->is_telegram_id_verified === 1) {
+            if ($user->telegram_id !== null) {
                 Telegram::sendMessage([
                     'chat_id' => $updates["message"]["chat"]["id"],
                     'text' => "Вы уже успешно верефицировали свой аккаунт 😃\. Ваш профиль здесь __{$url}__\.",
@@ -35,7 +35,6 @@ class TelegramController extends Controller
             }
 
             $user->telegram_id = $new_user['id'];
-            $user->is_telegram_id_verified = 1;
             $user->save();
 
             Telegram::sendMessage([

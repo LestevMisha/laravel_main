@@ -13,16 +13,20 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->integer('days_left')->default(0);
-            $table->integer('is_referred')->default(0);
-            $table->string('telegram_id')->default("");
-            $table->string('telegram_username');
-            $table->integer('is_telegram_id_verified')->default(0);
             $table->string('uuid')->unique();
-            $table->string('referral_id')->unique();
+
+            $table->integer('days_left')->default(0);
+
+            $table->string('name');
             $table->string('email')->unique();
+            $table->string('telegram_username');
+
+            /* if empty (null) - user is not either verified/referred,
+            if not empty (<value>) - user is either verified/referred  */
+            $table->string('telegram_id')->nullable();
+            $table->string('referral_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
+
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

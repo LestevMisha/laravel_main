@@ -3,23 +3,47 @@
 namespace App\Services;
 
 use YooKassa\Client;
-use Illuminate\Http\Request;
+use App\Models\UsersTransactions;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
 class AuthService
 {
-    private $request = null;
-
-    public function __construct()
+    public function authenticateUser($email, $password, $remember, $this_)
     {
-        $this->request = new Request();
+        $credentials = compact('email', 'password');
+        if (Auth::attempt($credentials, $remember)) {
+
+            // check if user has verified telegram id
+            if (auth()->user()->telegram_id === null) {
+                return redirect()->route("telegram-verification");
+            }
+
+            session()->regenerate();
+            return redirect()->route("dashboard");
+        }
+        // if credentials are not correct
+        $this_->addError(
+            'email',
+            'Предоставленные вами учетные данные не совпадают с нашими записями.'
+        );
     }
 
-    /* ------------- FOR COMMON USE ------------- */
+
     // check if user was reffered on the website
     public function isReferred(): bool
     {
+        // check if user had successful transactions before - if so - restrict him, if not - give him chance even though he was registered before
+        $hasSuccessfulTransaction =
+            UsersTransactions::where('uuid', auth()->user()->uuid)
+            ->where('status', 'succeeded')
+            ->exists();
+
+        if ($hasSuccessfulTransaction) {
+            return false;
+        }
+
+        // check if referral exists
         $referral = Cache::get("referral_id");
         $referral_link = $referral["link"] ?? null;
         $referral_is_expired = $referral["isExpired"] ?? null;
@@ -30,41 +54,7 @@ class AuthService
     }
 
 
-    // Check current user state
-    public function checkUserState(string $ifUnauthorizedURI, string $ifUnverifiedURI)
-    {
-        if (Auth::check()) {
-            if (auth()->user()->is_telegram_id_verified === 1) {
-                return null;
-            } else {
-                return $ifUnverifiedURI;
-            }
-        } else {
-            return $ifUnauthorizedURI;
-        }
-    }
-
-    /* ------------- FOR EMAIL ------------- */
-    // Display an email verification notice.
-    public function notice(string $redirectTo = "dashboard")
-    {
-        if ($this->request->user() === null) {
-            return redirect()->route('register');
-        }
-        return $this->request->user()->hasVerifiedEmail()
-            ? redirect()->route($redirectTo) : view('auth.verify-email');
-    }
-
-    // Resent verificaiton email to user.
-    public function resend(Request $request)
-    {
-        $request->user()?->sendEmailVerificationNotification();
-        return back()
-            ->withSuccess('A fresh verification link has been sent to your email address.');
-    }
-
-
-    // Private Get YooKassa Client Object
+    // Get YooKassa Client Object
     public function getClient(): Client
     {
         $client = new Client();
@@ -73,7 +63,7 @@ class AuthService
     }
 
 
-    // Private Get YooKassa Create Payment
+    // Create YooKassa Payment
     public function createPayment(float $amount, string $description, array $options = [])
     {
         $authService = new AuthService();
