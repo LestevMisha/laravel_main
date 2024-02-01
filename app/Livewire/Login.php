@@ -50,7 +50,7 @@ class Login extends Component
         2. Must be logged in
         */
         if (Auth::check() && Auth::user()->telegram_id === null) {
-            return redirect()->route("confirmation");
+            return redirect()->route("telegram.verify");
         }
 
         if (Auth::check() && Auth::user()->telegram_id !== null) {

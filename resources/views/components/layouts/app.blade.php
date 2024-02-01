@@ -12,19 +12,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"
         integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link href="table-responsive.css" rel="stylesheet">
-    <link href="signin.css" rel="stylesheet">
-    <link href="cover.css" rel="stylesheet">
-    <link href="docs.css" rel="stylesheet">
-    <link href="features.css" rel="stylesheet">
+    <link href="{{ secure_asset('index.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('table-responsive.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('signin.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('cover.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('docs.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('features.css') }}" rel="stylesheet">
     <title>{{ $title ?? 'Marathon' }}</title>
 </head>
 
 <body>
     @include('templates.header')
-    {{ $slot }}
+    <div class="container my-5">
+        {{ $slot }}
+    </div>
     @include('templates.footer')
-    <script src="general.js"></script>
+    <script src="{{ secure_asset('general.js') }}"></script>
 </body>
 
 </html>

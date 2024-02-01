@@ -54,7 +54,7 @@ class TelegramController extends Controller
 
     public function setWebhook()
     {
-        $url = config("services.website.url") . config("services.telegram.bot_token") . "/tgwebhook";
+        $url = config("services.website.url") . config("services.telegram.bot_token") . "/webhook";
         Telegram::setWebhook([
             "url" => $url
         ]);

@@ -22,7 +22,7 @@
                             <div class="me-2">E-mail:</div>
                             <div>{{ Auth::user()->email }}</div>
                         </div>
-                        <a class="btn btn-primary" href="{{ route('verification.notice') }}">Верефицировать E-mail</a>
+                        <a class="btn btn-primary" href="{{ route('email.verify') }}">Верефицировать E-mail</a>
                     </div>
                 @else
                     <div class="vblock">
@@ -41,26 +41,36 @@
 
 
                 @if (Auth::user()->days_left === 0)
-                    <a class="btn btn-outline-primary" href="{{ route('pay_3000') }}">Получить доступ в клуб</a>
+                    <form class="d-inline" method="POST" action="{{ route('payment.monthly') }}">
+                        @csrf
+                        <button onclick="$(this).addClass('text-muted disabled');" type="submit"
+                            class="btn btn-outline-primary">Получить доступ в клуб</button>
+                    </form>
                 @else
                     <div class="hblock">
                         <div class="vr me-2"></div>
                         <div class="me-2">Оставшиеся дни:</div>
                         <div>{{ Auth::user()->days_left }} дней</div>
                     </div>
+
+                    <div class="hblock">
+                        <div class="vr me-2"></div>
+                        <div class="me-2">Закрытый клуб: </div>
+                        <a href="https://t.me/+U86N3fnqA7wzM2Vl">https://t.me/+U86N3fnqA7wzM2Vl</a>
+                    </div>
                 @endif
 
                 <div class="vblock vblock_gap_0.5em">
                     @if (Auth::user()->days_left !== 0)
-                        <div class="hblock">
-                            <div class="vr me-2"></div>
-                            <div class="me-2">Реферальная ссылка</div>
-                        </div>
-                        <div class="col-6">
+                        <div class="vblock vblock_gap_0.5em">
                             @if ($this->hasCardVerification())
+                                <div class="hblock">
+                                    <div class="vr me-2"></div>
+                                    <div class="me-2 text-muted">Реферальная ссылка</div>
+                                </div>
                                 <div class="input-group mb-1">
                                     <input id="copyTarget" type="text" class="form-control"
-                                        value="{{ url('/') . '/referral_payment?referral_id=' . Auth::user()->referral_id }}">
+                                        value="{{ url('/') . '/payment/referral?referral_id=' . Auth::user()->referral_id }}">
 
                                     <button id="copyButton" class="btn btn-outline-primary"
                                         style="border-radius: 0 var(--bs-border-radius) var(--bs-border-radius) 0;"
@@ -71,7 +81,7 @@
                             @else
                                 <!-- Button trigger modal -->
                                 <button wire:click="setModal(1)" type="button" class="btn btn-outline-primary"
-                                    data-bs-toggle="modal" data-bs-target="#modal">Получить реферальную ссылку</button>
+                                    data-bs-toggle="modal" data-bs-target="#modal">Стать Партнером</button>
 
                                 <!-- Modal -->
                                 <div class="modal fade {{ $isModalOpened === 1 ? 'show' : '' }}"

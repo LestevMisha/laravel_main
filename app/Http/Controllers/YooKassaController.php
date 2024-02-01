@@ -24,7 +24,7 @@ class YooKassaController extends Controller
         $this->authService = new AuthService();
     }
 
-    public function pay_3000(Request $request)
+    public function monthlyPayment(Request $request)
     {
         // create transaction
         $user = Auth::user();
@@ -131,14 +131,14 @@ class YooKassaController extends Controller
     }
 
     // --> Referral payment
-    public function referral_payment(Request $request)
+    public function referralPayment(Request $request)
     {
 
         // make sure that link is either with referral id or not
         if ($request->referral_id !== null) {
             // make sure the user who pays is not the user with referral
             if ($request->user()?->referral_id === User::where("referral_id", $request->referral_id)->first()->referral_id) {
-                return redirect()->route("error")->withErrors(["error" => "Sorry, you can't use your own referral link"]);
+                return redirect()->route("error")->withErrors(["error" => "К сожалению, вы не можете использовать собственную реферальную ссылку."]);
             } else {
                 Cache::put("referral_id", ["link" => (string)$request->referral_id, "isExpired" => "false"], 1200); // 20 minutes
             }
@@ -146,11 +146,11 @@ class YooKassaController extends Controller
 
         // make sure that user is logged in
         if (!Auth::check()) {
-            return redirect()->route("login");
+            return redirect()->route("register");
         }
         // make sure that user has verified telegram_id
         if (!Auth::user()->telegram_id) {
-            return redirect()->route("confirmation");
+            return redirect()->route("telegram.verify");
         }
 
         // get referral data

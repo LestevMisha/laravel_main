@@ -3,12 +3,29 @@
 namespace App\Services;
 
 use YooKassa\Client;
+// use App\Models\Admin;
 use App\Models\UsersTransactions;
 use Illuminate\Support\Facades\Auth;
+// use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Cache;
 
 class AuthService
 {
+    public function authenticateAdmin($telegram_username, $password, $ip, $remember, $this_)
+    {
+        $credentials = compact('telegram_username', 'password');
+        if (auth()->guard('admin')->attempt($credentials, $remember)) {
+            $admin = auth()->guard('admin')->user();
+            return redirect()->route('admin.panel');
+        }
+
+        // if credentials are not correct
+        $this_->addError(
+            'telegram_username',
+            'Предоставленные вами учетные данные не совпадают с нашими записями.'
+        );
+    }
+
     public function authenticateUser($email, $password, $remember, $this_)
     {
         $credentials = compact('email', 'password');
@@ -16,7 +33,7 @@ class AuthService
 
             // check if user has verified telegram id
             if (auth()->user()->telegram_id === null) {
-                return redirect()->route("telegram-verification");
+                return redirect()->route("telegram.verify");
             }
 
             session()->regenerate();

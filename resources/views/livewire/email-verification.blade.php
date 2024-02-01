@@ -13,8 +13,9 @@
                 получили электронное письмо,
                 <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
                     @csrf
-                    <button type="submit" class="btn btn-link p-0 m-0 align-baseline">нажмите здесь, чтобы запросить
-                        другой.</button>
+                    <button type="submit" class="btn btn-link p-0 m-0 align-baseline">
+                        нажмите здесь, чтобы запросить другой.
+                    </button>
                 </form>
                 <a href="https://mail.google.com/" target="_blank">Перейти в Gmail</a>
             </div>

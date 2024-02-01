@@ -1,0 +1,7 @@
+1. - change path in .env on current domain name (path). Last line `MAIN_WEBSITE_URL`
+2. - change notification link in YooKassa on a current domain name and add /yoocallback at the end
+3. - set telegram webhook on the current url using /setwebhook page on the website (1st step must be done bfr it)
+
+pass: 73.37.205.89
+command: npx localtunnel --port 8000 --subdomain misha
+url: https://misha.loca.lt/

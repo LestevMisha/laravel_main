@@ -2,38 +2,41 @@
 
 namespace App\Livewire;
 
+use App\Models\User;
 use Livewire\Component;
 use Illuminate\Http\Request;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Auth\Events\Verified;
 
 class EmailVerification extends Component
 {
-    /**
-     * User's email verificaiton.
-     *
-     * @param  \Illuminate\Http\EmailVerificationRequest $request
-     * @return \Illuminate\Http\Response
-     */
-    public function verify(EmailVerificationRequest $emailRequest)
+
+    // User's email verificaiton.
+    public function verify(Request $request)
     {
-        $emailRequest->fulfill();
-        return redirect()->route('dashboard');
+        $userId = $request->route('id');
+        $user = User::findOrFail($userId);
+
+        if ($user->hasVerifiedEmail()) {
+            return redirect()->route("dashboard");
+        }
+
+        if ($user->markEmailAsVerified()) {
+            event(new Verified($user));
+        }
+
+        return redirect()->route("dashboard");;
     }
 
-    /**
-     * Resend verificaiton email to user.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    // Resend verificaiton email to user.
     public function resend(Request $request)
     {
         $request->user()?->sendEmailVerificationNotification();
         return back()
-            ->withSuccess('A fresh verification link has been sent to your email address.');
+            ->withSuccess('На ваш адрес электронной почты была отправлена новая ссылка для подтверждения.');
     }
 
-    public function mount(Request $request) {
+    public function mount(Request $request)
+    {
         if ($request->user()->hasVerifiedEmail()) {
             return redirect()->route('dashboard');
         }

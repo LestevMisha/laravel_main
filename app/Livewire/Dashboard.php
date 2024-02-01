@@ -84,14 +84,14 @@ class Dashboard extends Component
             return redirect()->route("login");
         }
         if (Auth::user()->telegram_id === null) {
-            return redirect()->route("telegram-verification");
+            return redirect()->route("telegram.verify");
         }
 
         // !IMPORTANT It must be after user is logged in
         // open referral payment link if user was reffered
         $authService = new AuthService();
         if ($authService->isReferred()) {
-            return redirect()->route("referral_payment");
+            return redirect()->route("payment.referral");
         }
     }
 
