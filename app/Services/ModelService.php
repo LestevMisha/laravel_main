@@ -103,4 +103,11 @@ class ModelService
         return redirect()->route('login');
         // return redirect()->route('login')->withErrors(["email" => 'Вы успешно вышли из аккаунта.'])->onlyInput("email");
     }
+
+    public function logout_admin()
+    {
+        Auth::guard('admin')->logout();
+        return redirect()->route('login');
+        // return redirect()->route('login')->withErrors(["email" => 'Вы успешно вышли из аккаунта.'])->onlyInput("email");
+    }
 }

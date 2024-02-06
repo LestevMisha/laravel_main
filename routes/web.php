@@ -10,6 +10,8 @@ use App\Livewire\Dashboard;
 use App\Livewire\Documents;
 use App\Livewire\AdminPanel;
 use App\Services\ModelService;
+use App\Livewire\ResetPassword;
+use App\Livewire\ForgotPassword;
 use App\Livewire\EmailVerification;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Route;
@@ -32,9 +34,12 @@ Route::get("/telegram/verify", TelegramVerification::class)->name("telegram.veri
 Route::get("/email/verify", EmailVerification::class)->name("email.verify");
 Route::get("/admin/login", Admin::class)->name("admin.login");
 Route::get("/admin/panel", AdminPanel::class)->name("admin.panel");
+Route::get('/forgot-password', ForgotPassword::class)->name('password.forgot');
+Route::get('/reset-password/{token}', ResetPassword::class)->name('password.reset');
 
 // methods
 Route::post("/logout", [ModelService::class, "logout"])->name("logout");
+Route::post("/logout/admin", [ModelService::class, "logout_admin"])->name("logout.admin");
 
 
 // Telegram Verification

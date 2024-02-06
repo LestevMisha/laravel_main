@@ -165,3 +165,34 @@
 .container_v-1 {
     max-width: 40em;
 }
+
+table {
+    width: 100% !important;
+    display: block !important;
+    overflow-x: auto;
+    white-space: nowrap;
+    min-width: 0 !important;
+    padding: 1em 0 !important;
+}
+
+.vblock.vblock_align {
+    justify-content: center;
+    align-items: center;
+}
+
+.hblock.hblock_align {
+    justify-content: center;
+    align-items: center;
+}
+
+.hblock.hblock_gap {
+    gap: 1em;
+}
+
+#timer_wrapper {
+    display: none;
+}
+
+#timer_wrapper.active {
+    display: block;
+}

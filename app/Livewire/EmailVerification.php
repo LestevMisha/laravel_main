@@ -6,6 +6,7 @@ use App\Models\User;
 use Livewire\Component;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Verified;
+use Illuminate\Support\Facades\Auth;
 
 class EmailVerification extends Component
 {
@@ -37,6 +38,11 @@ class EmailVerification extends Component
 
     public function mount(Request $request)
     {
+        // in case if admin
+        if (Auth::guard('admin')->check()) {
+            return redirect()->route("admin.panel");
+        }
+        
         if ($request->user()->hasVerifiedEmail()) {
             return redirect()->route('dashboard');
         }

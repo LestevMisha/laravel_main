@@ -1,17 +1,24 @@
 <main class="form-signin w-100 m-auto">
-    <form wire:submit="auth_admin">
+    <form wire:submit="resetPassword">
         @csrf
-        <h1 class="h3 mb-3 fw-normal">Админ Панель</h1>
+        <input wire:model="token" type="text" hidden value="{{ request()?->token }}">
+       
+        <div class="form-floating">
+            <input wire:model.blur="email" name="field" type="email" class="form-control" id="floatingInput"
+                placeholder="name@example.com" value="{{ old('email') }}">
+            <label for="floatingInput">E-mail Адрес</label>
+        </div>
 
         <div class="form-floating">
-            <input wire:model.blur="telegram_profile" name="pemail" type="text" class="form-control"
-                id="floatingInput" placeholder="telegram_profile">
-            <label for="floatingInput">Telegram профиль</label>
-        </div>
-        <div class="form-floating">
-            <input wire:model.blur="password" name="epassword" type="password" class="form-control"
-                id="floatingPassword" placeholder="password">
+            <input wire:model="password" name="password" type="password" class="form-control" id="floatingPassword"
+                placeholder="Password">
             <label for="floatingPassword">Пароль</label>
+        </div>
+
+        <div class="form-floating">
+            <input wire:model="password_confirmation" name="password_confirmation" type="password" class="form-control"
+                id="password_confirmation" placeholder="password_confirmation">
+            <label for="password_confirmation">Повтор Пароля</label>
         </div>
 
         <div class="form-text">
@@ -38,13 +45,6 @@
         </div>
     </div>
 
-    <div class="form-check text-start my-3">
-        <input wire:model="remember" class="form-check-input" type="checkbox" value="remember-me"
-            id="flexCheckDefault">
-        <label class="form-check-label" for="flexCheckDefault">
-            Запомнить меня
-        </label>
-    </div>
-    <button class="btn btn-primary w-100 py-2" type="submit">Войти</button>
+    <button class="btn btn-primary w-100 py-2 my-2" type="submit">Изменить пароль</button>
 </form>
 </main>

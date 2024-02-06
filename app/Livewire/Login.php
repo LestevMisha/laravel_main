@@ -44,6 +44,12 @@ class Login extends Component
 
     public function mount()
     {
+
+        // in case if admin
+        if (Auth::guard('admin')->check()) {
+            return redirect()->route("admin.panel");
+        }
+        
         /*
         In case if user want to login - redirect him back to confirmation
         1. Telegram must be unverified

@@ -69,6 +69,12 @@ class Register extends Component
 
     public function mount()
     {
+        
+        // in case if admin
+        if (Auth::guard('admin')->check()) {
+            return redirect()->route("admin.panel");
+        }
+
         /*
         In case is user want to insert changes
         1. Telegram must be unverified

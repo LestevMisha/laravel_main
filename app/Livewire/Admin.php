@@ -7,6 +7,7 @@ use Livewire\Component;
 use Illuminate\Http\Request;
 use App\Services\AuthService;
 use Livewire\Attributes\Validate;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class Admin extends Component
@@ -40,6 +41,18 @@ class Admin extends Component
         } catch (Exception $e) {
             $error = "Пожалуйста проверьте интернет соединение. Попробуйте позже. Если ничего не помогло напишите нам в поддержку." . " Ошибка сервера: " . $e->getMessage();
             $this->addError("server", $error);
+        }
+    }
+
+    public function mount()
+    {
+        // check if logged user tries to access admin panel
+        if (Auth::check()) {
+            return redirect()->route('login');
+        }
+
+        if (Auth::guard('admin')->check()) {
+            return redirect()->route("admin.panel");
         }
     }
 
