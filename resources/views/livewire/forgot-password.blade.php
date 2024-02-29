@@ -1,3 +1,38 @@
+<div class="flex v1">
+    <div class="form-wrapper">
+        <h1>Забыли Пароль?</h1>
+        <x-modern-loader />
+
+        <form wire:submit.default="sendResetLink" class="modern-form">
+            @csrf
+            <div class="flex v w100">
+                <x-modern-input attr="email" title="Email Адрес" />
+                <button class="go-button v1">Отправить Письмо</button>
+
+                @if (session()->has('success'))
+                    <div class="text-success mt-1">
+                        {{ session('success') }}
+                    </div>
+                @elseif (session()->has('failure'))
+                    <div class="text-error more mt-1">
+                        {{ session('failure') }}
+                    </div>
+                @else
+                    <div class="text-15px text-grey mt-1">Введите адрес электронной почты привязанный к аккаунту. Мы
+                        вышлем письмо
+                        о смене пароля.</div>
+                @endif
+
+                <x-modern-error />
+                <a class="text-15px mt-1" href="https://mail.google.com/" target="_blank">Перейти в Gmail</a>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+
+{{-- 
 <main class="form-signin w-100 m-auto">
     <form wire:submit="sendResetLink">
         @csrf
@@ -83,4 +118,4 @@
         });
     });
 </script>
-</main>
+</main> --}}

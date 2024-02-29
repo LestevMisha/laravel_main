@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Exception;
 use Livewire\Component;
 use App\Services\AuthService;
+use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,58 +14,56 @@ class Login extends Component
     public $remember = false;
 
     // validate attributes for validation
-    #[Validate('required|min:4|email')]
-    public $email = "";
+    public $email;
+    public $password;
 
-    #[Validate('required|min:8')]
-    public $password = "";
+    protected $rules = [
+        'email' => "required|min:4|email",
+        'password' => "required|min:8",
+    ];
+
+    private $authService;
+    public function __construct()
+    {
+        $this->authService = new AuthService();
+    }
 
 
-    public function auth()
+    /* +++++++++++++++++++ PUBLIC SECTION +++++++++++++++++++ */
+
+    public function submit()
     {
         // validate the fields
         $this->validate();
 
-        try {
+        // save password
+        session(["password" => $this->password]);
 
+        $this->authService->handleError(function () {
             // authentificate user
-            $authService = new AuthService();
-            return $authService->authenticateUser(
+            return $this->authService->authenticateUser(
                 $this->email,
                 $this->password,
                 $this->remember,
                 $this,
             );
-        } catch (Exception $e) {
-            $error = "Пожалуйста проверьте интернет соединение. Попробуйте позже. Если ничего не помогло напишите нам в поддержку." . " Ошибка сервера: " . $e->getMessage();
-            $this->addError("server", $error);
-        }
+        }, $this);
     }
 
 
+    /* +++++++++++++++++++ LIVEWIRE'S LIFECYCLE SECTION +++++++++++++++++++ */
     public function mount()
     {
+        // keep entered user's data
+        $this->email = session()->get("email", "");
+        $this->password = session()->get("password", "");
 
-        // in case if admin
-        if (Auth::guard('admin')->check()) {
-            return redirect()->route("admin.panel");
-        }
-        
-        /*
-        In case if user want to login - redirect him back to confirmation
-        1. Telegram must be unverified
-        2. Must be logged in
-        */
-        if (Auth::check() && Auth::user()->telegram_id === null) {
-            return redirect()->route("telegram.verify");
-        }
-
-        if (Auth::check() && Auth::user()->telegram_id !== null) {
-            return redirect()->route("dashboard");
-        }
+        // general checks
+        return $this->authService->check();
     }
 
-
+    // change default layout
+    #[Layout('components.layouts.auth')]
     public function render()
     {
         return view('livewire.login');

@@ -2,15 +2,52 @@
 
 namespace App\Services;
 
-use YooKassa\Client;
+use Exception;
 // use App\Models\Admin;
+use YooKassa\Client;
 use App\Models\UsersTransactions;
-use Illuminate\Support\Facades\Auth;
 // use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
 class AuthService
 {
+
+    public function handleError($func, $this_, $key = "server")
+    {
+        try {
+            $func();
+        } catch (Exception $e) {
+            $error = $e->getMessage();
+            if (strpos($error, 'SQL') !== false) {
+                $this_->addError($key, "Пожалуйста проверьте интернет соединение. Попробуйте позже. Если ничего не помогло напишите нам в <a href='/support'>поддержку</a>." . " Ошибка сервера: " . $error);
+            } else {
+                $this_->addError($key, $error);
+            }
+        }
+    }
+
+    public function check()
+    {
+        // in case if admin
+        if (Auth::guard('admin')->check()) {
+            return redirect()->route("admin.panel");
+        }
+
+        /*
+        In case if user want to login - redirect him back to confirmation
+        1. Telegram must be unverified
+        2. Must be logged in
+        */
+        if (Auth::check() && Auth::user()->telegram_id === null) {
+            return redirect()->route("telegram.verify");
+        }
+
+        if (Auth::check() && Auth::user()->telegram_id !== null) {
+            return redirect()->route("dashboard");
+        }
+    }
+
     public function authenticateAdmin($telegram_username, $password, $ip, $remember, $this_)
     {
         $credentials = compact('telegram_username', 'password');
@@ -31,11 +68,15 @@ class AuthService
         $credentials = compact('email', 'password');
         if (Auth::attempt($credentials, $remember)) {
 
+            // remove session's name, email, password and currentStep, used in registration
+            session()->forget(['name', 'email', 'password', 'currentStep']);
+
             // check if user has verified telegram id
             if (auth()->user()->telegram_id === null) {
                 return redirect()->route("telegram.verify");
             }
 
+            // make a new session
             session()->regenerate();
             return redirect()->route("dashboard");
         }

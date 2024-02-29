@@ -4,40 +4,58 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta.2/js/bootstrap.js"></script> --}}
-    {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script> --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"
-        integrity="sha512-pHVGpX7F/27yZ0ISY+VVjyULApbDlD0/X0rgGbTqCE7WFW5MezNTWG/dnhtbBuICzsd0WQPgpE4REBLv+UqChw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link href="{{ secure_asset('table-responsive.css') }}" rel="stylesheet">
-    <link href="{{ secure_asset('signin.css') }}" rel="stylesheet">
-    <link href="{{ secure_asset('cover.css') }}" rel="stylesheet">
-    <link href="{{ secure_asset('docs.css') }}" rel="stylesheet">
-    <link href="{{ secure_asset('features.css') }}" rel="stylesheet">
-    <title>{{ $title ?? 'Marathon' }}</title>
-    @livewireStyles
-    @livewireScripts
+    <title>{{ $title ?? 'КЛУБ START' }}</title>
+
+    <!-- +++++++++++ CDNs +++++++++++ -->
+    {{-- slick slider --}}
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+
+    <!-- +++++++++++ PROJECT CSS +++++++++++ -->
+    <link href="{{ secure_asset('styles/different-components.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('styles/main.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('styles/index.css') }}" rel="stylesheet">
+    {{-- custom modern --}}
+    <link href="{{ secure_asset('styles/modern.css') }}" rel="stylesheet">
+    {{-- slick slider --}}
+    <link href="{{ secure_asset('styles/slick-slider.css') }}" rel="stylesheet">
+
 </head>
 
 <body>
+
     {{-- Admin --}}
-    @if (Auth::guard('admin')->check())
+    {{-- @if (Auth::guard('admin')->check())
         @include('templates.header_admin')
         <div class="container my-5">
             {{ $slot }}
         </div>
     @else
-        {{-- User --}}
         @include('templates.header')
         <div class="container my-5">
             {{ $slot }}
         </div>
-    @endif
-    @include('templates.footer')
-    <script src="{{ secure_asset('general.js') }}"></script>
+    @endif --}}
+    {{-- @include('templates.footer') --}}
+
+    {{ $slot }}
+
+    <!-- +++++++++++ CDNs +++++++++++ -->
+    {{-- jQuery/Mask jQuery --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    {{--  slick slider  --}}
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+
+    <!-- +++++++++++ PROJECT JAVASCRIPT +++++++++++ -->
+    {{-- clipboard copy --}}
+    <script src="{{ secure_asset('javascript/general.js') }}"></script>
+    {{-- custom modern --}}
+    <script src="{{ secure_asset('javascript/modern.js') }}"></script>
+    {{-- slick slider --}}
+    <script src="{{ URL::asset('javascript/slick-slider.js') }}"></script>
 </body>
 
 </html>

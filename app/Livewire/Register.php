@@ -2,49 +2,70 @@
 
 namespace App\Livewire;
 
-use Exception;
+use Throwable;
+
 use Livewire\Component;
 use App\Services\AuthService;
-
 use App\Services\ModelService;
-use Livewire\Attributes\Validate;
-use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\Layout;
 use Illuminate\Auth\Events\Registered;
 
 class Register extends Component
 {
-    public $password;
-    public $password_confirmation;
     public $remember = false;
+    public $currentStep;
 
     // validate attributes for validation
-    #[Validate("required|string|min:2|max:25")]
-    public $name = "";
+    public $name;
+    public $email;
+    public $password;
+    public $password_confirmation;
 
-    #[Validate("required|min:4|max:50|email|unique:users")]
-    public $email = "";
+    protected $rules = [
+        'name' => "required|string|min:2|max:25",
+        'email' => "required|min:4|max:50|email|unique:users",
+        'password' => "required|min:8|confirmed",
+    ];
 
-    #[Validate("required|min:1|max:50|unique:users")]
-    public $telegram_username = "";
+    private $authService;
+    public function __construct() {
+        $this->authService = new AuthService();
+    }
 
 
-    public function store()
+    /* +++++++++++++++++++ PUBLIC SECTION +++++++++++++++++++ */
+    public function nextStep()
+    {
+        // Validation rules for each step
+        if ($this->currentStep === 0) {
+            $this->valid("name");
+        } elseif ($this->currentStep === 1) {
+            $this->valid("email");
+        } elseif ($this->currentStep === 2) {
+            $this->submit();
+        }
+    }
+
+    public function previousStep()
+    {
+        $this->currentStep--;
+        session()->put("currentStep", $this->currentStep);
+    }
+
+    public function submit()
     {
         // validate the fields
         $this->validate();
 
-        // confirm password
-        $this->validate([
-            'password' => "required|min:8|confirmed"
-        ]);
+        // save password
+        session(["password" => $this->password]);
 
-        try {
+        $this->authService->handleError(function () {
             // create a new user
             $modelService = new ModelService();
             $user = $modelService->createUser(
                 $this->name,
                 $this->email,
-                $this->telegram_username,
                 $this->password,
             );
 
@@ -53,44 +74,45 @@ class Register extends Component
 
 
             // authentificate user
-            $authService = new AuthService();
-            return $authService->authenticateUser(
+            return $this->authService->authenticateUser(
                 $this->email,
                 $this->password,
                 $this->remember,
                 $this,
             );
-        } catch (Exception $e) {
-            $error = "Пожалуйста проверьте интернет соединение. Попробуйте позже. Если ничего не помогло напишите нам в поддержку." . " Ошибка сервера: " . $e->getMessage();
-            $this->addError("server", $error);
-        }
+        }, $this);
     }
 
 
+    /* +++++++++++++++++++ PRIVATE SECTION +++++++++++++++++++ */
+    private function valid($key)
+    {
+        $this->authService->handleError(function () use ($key) {
+            $this->resetValidation();
+            $this->validateOnly($key);
+            session([$key => $this->{$key}]);
+            // Move to the next step
+            $this->currentStep++;
+            session()->put("currentStep", $this->currentStep);
+        }, $this, $key);
+    }
+
+
+    /* +++++++++++++++++++ LIVEWIRE'S LIFECYCLE SECTION +++++++++++++++++++ */
     public function mount()
     {
-        
-        // in case if admin
-        if (Auth::guard('admin')->check()) {
-            return redirect()->route("admin.panel");
-        }
+        // keep entered user's data
+        $this->currentStep = session()->get("currentStep", 0);
+        $this->name = session()->get("name", "");
+        $this->email = session()->get("email", "");
+        $this->password = session()->get("password", "");
 
-        /*
-        In case is user want to insert changes
-        1. Telegram must be unverified
-        2. Must be logged in
-        */
-        if (Auth::check() && Auth::user()->telegram_id === null) {
-            $modelService = new ModelService();
-            $modelService->deleteUser(Auth::user()->email);
-        }
-
-        if (Auth::check() && Auth::user()->telegram_id !== null) {
-            return redirect()->route("dashboard");
-        }
+        // general checks
+        return $this->authService->check();
     }
 
-
+    // change default layout
+    #[Layout('components.layouts.auth')]
     public function render()
     {
         return view('livewire.register');

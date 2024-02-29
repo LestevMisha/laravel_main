@@ -1,0 +1,493 @@
+@font-face {
+    font-family: 'Tinkoff Sans';
+    src: url('../fonts/TinkoffSans/TinkoffSans-Bold.eot');
+    src: local('Tinkoff Sans Bold'), local('../fonts/TinkoffSans/TinkoffSans-Bold'),
+        url('../fonts/TinkoffSans/TinkoffSans-Bold.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/TinkoffSans/TinkoffSans-Bold.woff2') format('woff2'),
+        url('../fonts/TinkoffSans/TinkoffSans-Bold.woff') format('woff'),
+        url('../fonts/TinkoffSans/TinkoffSans-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Tinkoff Sans';
+    src: url('../fonts/TinkoffSans/TinkoffSans-Medium.eot');
+    src: local('Tinkoff Sans Medium'), local('../fonts/TinkoffSans/TinkoffSans-Medium'),
+        url('../fonts/TinkoffSans/TinkoffSans-Medium.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/TinkoffSans/TinkoffSans-Medium.woff2') format('woff2'),
+        url('../fonts/TinkoffSans/TinkoffSans-Medium.woff') format('woff'),
+        url('../fonts/TinkoffSans/TinkoffSans-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Tinkoff Sans';
+    src: url('../fonts/TinkoffSans/TinkoffSans-Regular.eot');
+    src: local('Tinkoff Sans Regular'), local('../fonts/TinkoffSans/TinkoffSans-Regular'),
+        url('../fonts/TinkoffSans/TinkoffSans-Regular.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/TinkoffSans/TinkoffSans-Regular.woff2') format('woff2'),
+        url('../fonts/TinkoffSans/TinkoffSans-Regular.woff') format('woff'),
+        url('../fonts/TinkoffSans/TinkoffSans-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+* {
+    box-sizing: border-box !important;
+}
+
+body,
+html,
+main,
+section {
+    height: 100%;
+    font-family: helvetica, arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    margin: 0;
+    padding: 0;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 32px;
+    text-align: center;
+    font-family: "Tinkoff Sans";
+}
+
+button {
+    border-width: 0;
+    padding: 0;
+    cursor: pointer;
+    background-color: #00000000;
+}
+
+/* tinkoff input */
+.modern-label {
+    position: absolute;
+    left: 16px;
+    top: 16px;
+    max-width: calc(100% - 32px);
+    color: rgba(0, 0, 0, .54);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    pointer-events: none;
+    transition: all .25s;
+    transform-origin: left;
+    transition-property: transform, color, font-size;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    font-size: 15px;
+    line-height: 24px;
+    font-weight: 400;
+}
+
+.modern-label.modern-label-error {
+    color: rgba(0, 0, 0, .54) !important;
+}
+
+.modern-wrapper {
+    margin-top: 24px;
+    position: relative;
+    display: block;
+    border-radius: inherit;
+    font-size: 15px;
+    line-height: 24px;
+    width: 100%;
+}
+
+.modern-input {
+    font-weight: 400;
+    height: 56px;
+    border: 0;
+    border-radius: 8px;
+    outline: none;
+    background-color: #ecf1f7;
+    transition-duration: .25s;
+    transition-property: background-color;
+    transition-timing-function: ease;
+    width: 100%;
+    padding: 19px 16px 0;
+}
+
+.modern-input.modern-input-error {
+    background-color: rgba(224, 31, 25, .16);
+}
+
+.modern-input.modern-input-error:focus {
+    box-shadow: inset 0 0 0 1px #e31c1c;
+    background-color: #ffffff00 !important;
+}
+
+.modern-input:focus~.modern-label,
+.modern-input:valid~.modern-label {
+    transform: translateY(-10px) scale(0.87);
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.modern-input:focus {
+    background-color: rgba(0, 0, 0, 0);
+    box-shadow: inset 0 0 0 1px #000;
+    -webkit-appearance: none;
+}
+
+.modern-input:valid~.right-content {
+    display: flex;
+}
+
+.right-content {
+    display: none;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+}
+
+.reset-button, .password-button {
+    margin-right: 18px;
+    background-color: transparent;
+    color: inherit;
+}
+
+.reset-icon {
+    display: flex;
+    width: 12px;
+    height: 12px;
+    cursor: pointer;
+    color: rgba(0, 0, 0, .4);
+    transition: color .25s;
+}
+
+.eye-icon {
+    display: flex;
+    width: 1.5em;
+    height: 1.5em;
+    cursor: pointer;
+    color: rgba(0, 0, 0, .4);
+    transition: color .25s;
+}
+
+.reset-icon:hover, .eye-icon:hover {
+    color: rgba(0, 0, 0, .6);
+}
+
+/* tinkoff input */
+
+/* register form */
+.modern-form {
+    display: flex;
+    flex-direction: row;
+}
+
+.form-wrapper {
+    position: relative;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    padding: 48px;
+    width: 100%;
+    background-color: #FFFFFF;
+    border-radius: 1em;
+    max-width: 515px;
+    height: fit-content;
+}
+
+.modern-button {
+    margin-top: 24px;
+    margin-left: 4px;
+    cursor: pointer;
+    transition: color .25s;
+    padding: 0 16px;
+    height: 56px;
+    border-radius: 8px;
+    background-color: #0d6efd;
+    transition-duration: .25s;
+    transition-property: background-color;
+    transition-timing-function: ease;
+}
+
+.modern-button:hover {
+    background-color: #0d59fd;
+}
+
+.previous-step-button {
+    position: absolute;
+    left: 24px;
+    top: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color .25s;
+}
+
+.go-button {
+    font-size: 1em;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    background-color: #0d6efd;
+    border-radius: 1em;
+    color: #FFF !important;
+    height: 3em;
+    width: 100%;
+    transition-duration: .25s;
+    transition-property: background-color, scale;
+    transition-timing-function: ease;
+}
+
+.go-button.go-button_50\% {
+    width: 50%;
+}
+
+.go-button.go-button_hover:hover+.b-img_v9 {
+    transform: translateX(-1em) translateY(-2em);
+    opacity: 1;
+}
+
+.go-button.v2 {
+    font-size: 1.2em;
+}
+
+.go-button.v1 {
+    margin-top: 24px;
+    height: 56px;
+}
+
+.go-button:hover {
+    background-color: #0d59fd;
+    scale: 1.005;
+}
+
+.previous-step-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #9299a2;
+}
+
+.modern-next {
+    display: flex;
+    width: 24px;
+    height: 24px;
+    color: #FFFFFF;
+}
+
+.flex {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex.align {
+    align-items: center;
+}
+
+.flex.space-btw {
+    justify-content: space-between;
+}
+
+.flex.h {
+    flex-direction: row;
+}
+
+.flex.v {
+    flex-direction: column;
+}
+
+.flex.w100 {
+    width: 100%;
+}
+
+.flex.h100 {
+    height: 100%;
+}
+
+.flex.gap {
+    gap: 1em;
+}
+
+.flex.fit {
+    width: fit-content;
+}
+
+.flex.v1 {
+    background-color: #f6f7f8;
+    height: 100%;
+    width: 100%;
+    background-image: url("../images/knight.svg");
+    /* background-image: url(https://sso-forms-prod.cdn-tinkoff.ru/client/releases/2.29.0/imagesSolid/tinkoff-background.svg); */
+    background-repeat: no-repeat;
+    background-position: 100% 100%;
+    background-size: 59% 90%;
+}
+
+.flex.v2 {
+    position: relative;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 48px;
+    width: 100%;
+    background-color: #FFFFFF;
+    border-radius: 1em;
+    max-width: 515px;
+    height: fit-content;
+}
+
+.modern-header {
+    position: fixed;
+    top: 24px;
+    left: 24px;
+    right: 24px;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+}
+
+.close-button {
+    display: flex;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, .08);
+    cursor: pointer;
+    transition: background-color .25s;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-icon {
+    width: 12px;
+    height: 12px;
+    cursor: pointer;
+    color: rgba(0, 0, 0, .54);
+}
+
+.mark-icon {
+    width: 2em;
+    margin-left: 0.5em;
+    color: #0d6efd;
+}
+
+.qr-code-icon {
+    position: relative;
+    width: 8em;
+}
+
+.arrow-icon {
+    position: absolute;
+    top: -2em;
+    left: -5em;
+    width: 4em;
+}
+
+i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+svg {
+    width: 100%;
+    height: 100%;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-remove {
+    font-size: 0.8em;
+    cursor: pointer;
+    color: #e31c1c;
+    transition-duration: .25s;
+    transition-property: color, scale;
+    transition-timing-function: ease;
+}
+
+.text-remove:hover {
+    color: #e60606;
+    scale: 1.005;
+}
+
+.text-error {
+    font-size: 0.8em;
+    color: #e31c1c;
+}
+
+.text-header {
+    display: flex;
+    align-items: center;
+    font-size: 1.5em;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.back-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.info-box {
+    position: relative;
+    text-align: center;
+    border-radius: 1em;
+    padding: 10px 20px;
+    -webkit-box-shadow: 0px 2px 20px 0px rgba(0, 0, 0, 0.05);
+    ;
+    box-shadow: 0px 2px 20px 0px rgba(0, 0, 0, 0.05);
+    ;
+}
+
+.text-grey {
+    color: #8292A1 !important;
+}
+
+.text_dark-blue {
+    color: #082846 !important;
+}
+
+.text-start-back {
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    font-size: 10em;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-family: verdana;
+    color: #ecedee;
+}
+
+.mb-1 {
+    margin-bottom: 1em;
+}
+
+.mb-2 {
+    margin-bottom: 2em;
+}
+
+.my-1 {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}

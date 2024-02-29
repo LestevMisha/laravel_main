@@ -13,21 +13,20 @@ use Illuminate\Support\Facades\Hash;
 class ModelService
 {
 
-    public function createUser($name, $email, $telegram_username, $password)
+    public function createUser($name, $email, $password)
     {
 
-        if (Auth::check()) {
-            $uuid = Auth::user()->uuid;
-        } else {
-            $uuid = Str::uuid()->toString();
-        }
+        // if (Auth::check()) {
+        //     $uuid = Auth::user()->uuid;
+        // } else {
+        //     $uuid = Str::uuid()->toString();
+        // }
 
         return User::create([
-            'uuid' => $uuid,
+            'uuid' => Str::uuid()->toString(),
             'referral_id' => Str::uuid()->toString(),
             'name' => $name,
             'email' => $email,
-            'telegram_username' => $telegram_username,
             'password' => Hash::make($password),
 
         ]);

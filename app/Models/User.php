@@ -19,7 +19,6 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $fillable = [
         'name',
-        'telegram_username',
         'uuid',
         'referral_id',
         'email',

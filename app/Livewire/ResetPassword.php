@@ -9,6 +9,8 @@ use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Http\Client\Request;
+use Livewire\Attributes\Layout;
 
 class ResetPassword extends Component
 {
@@ -53,6 +55,12 @@ class ResetPassword extends Component
         return $this->addError('status', __($status));
     }
 
+    public function mount() {
+        $this->email = request()->email;
+    }
+
+    # change default layout
+    #[Layout("components.layouts.auth")]
     public function render()
     {
         return view('livewire.reset-password');

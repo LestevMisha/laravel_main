@@ -19,7 +19,7 @@ return new class extends Migration
 
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('telegram_username');
+            $table->string('telegram_username')->nullable();
 
             /* if empty (null) - user is not either verified/referred,
             if not empty (<value>) - user is either verified/referred  */

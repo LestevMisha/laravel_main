@@ -8,74 +8,60 @@ use Telegram\Bot\Laravel\Facades\Telegram;
 
 class TelegramController extends Controller
 {
+    
     public function webhook()
     {
         $updates = Telegram::getWebhookUpdate();
 
-        // check if it's a primary chat - restrict if bot from messaging there.
-        if (($updates['message']['chat']["title"] ?? null) === config("services.telegram.primary_chat_title")) {
+        // get user's uuid
+        $activation = $updates["message"]["text"];
+        $activation_arr = explode(" ", $activation);
+        $activation_key = $activation_arr[1];
+
+        // observed user's data
+        $new_user = $updates['message']['from'];
+
+        // find user in db
+        try {
+            $user = User::where("uuid", $activation_key)->first();
+        } catch (\Exception $e) {
             return;
         }
 
-        $new_user = $updates['message']['from'];
-        $url = str_replace(['-', '.'], ['\-', '\.'], config("services.website.url") . "dashboard");
-
-        // find user in db
-        $username = $new_user['username'];
-        $user = User::where("telegram_username", $username)->first();
-
-        // add user's id if it's correct
-        if (isset($user->telegram_username)) {
-
-            if ($user->telegram_id !== null) {
-                Telegram::sendMessage([
-                    'chat_id' => $updates["message"]["chat"]["id"],
-                    'text' => "Вы уже успешно верефицировали свой аккаунт 😃\. Ваш профиль здесь __{$url}__\.",
-                    'parse_mode' => 'MarkdownV2'
-                ]);
-                return "succeeded_again";
-            }
-
-            // check if a user is a private chat member already
-            try {
-                $chatMember = Telegram::getChatMember([
-                    'chat_id' => config("services.telegram.group_id"),
-                    'user_id' => $new_user["id"],
-                ]);
-            } catch (\Exception $e) {
-                // Set $chatMember to null in case of an error
-                $chatMember = null;
-            }
-
-            if ($chatMember !== null) {
-                // Get the current date
-                $currentDate = new DateTime();
-
-                // Get the last day of the current month
-                $lastDayOfMonth = (new DateTime())->modify('last day of');
-
-                // Calculate the number of days left
-                $daysLeft = (int)$currentDate->diff($lastDayOfMonth)->days + 1;
-                
-                $user->days_left = $daysLeft;
-            }
-
-            $user->telegram_id = $new_user['id'];
-            $user->save();
-
-            Telegram::sendMessage([
-                'chat_id' => $updates["message"]["chat"]["id"],
-                'text' => "*Спасибо вы успешно активировали свой аккаунт*\! Можете перейти по ссылке __{$url}__\, либо перезагрузите страницу\.",
-                'parse_mode' => 'MarkdownV2'
+        // check if a user is a private chat member already
+        try {
+            $chatMember = Telegram::getChatMember([
+                'chat_id' => config("services.telegram.group_id"),
+                'user_id' => $new_user["id"],
             ]);
-            return "succeeded";
+        } catch (\Exception $e) {
+            // Set $chatMember to null in case of an error
+            $chatMember = null;
         }
+
+        if ($chatMember !== null) {
+            // Get the current date
+            $currentDate = new DateTime();
+
+            // Get the last day of the current month
+            $lastDayOfMonth = (new DateTime())->modify('last day of');
+
+            // Calculate the number of days left
+            $daysLeft = (int)$currentDate->diff($lastDayOfMonth)->days + 1;
+
+            $user->days_left = $daysLeft;
+        }
+
+        // update user
+        $user->telegram_id = $new_user['id'];
+        $user->telegram_username = $new_user['username'];
+        $user->save();
+
         Telegram::sendMessage([
             'chat_id' => $updates["message"]["chat"]["id"],
-            'text' => 'К сожалению\, предоставленный вами _Телеграм Никнейм_ не соответствует аккаунту с которого вы присали это сообщение\.',
+            'text' => "✅ Вход в личный кабинет выполнен\.",
             'parse_mode' => 'MarkdownV2'
         ]);
-        return "failed";
     }
 
     public function setWebhook()

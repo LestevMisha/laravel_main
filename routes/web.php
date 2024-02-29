@@ -16,6 +16,7 @@ use App\Livewire\EmailVerification;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\TelegramVerification;
+use Telegram\Bot\Laravel\Facades\Telegram;
 use App\Http\Controllers\TelegramController;
 use App\Http\Controllers\YooKassaController;
 // make all redirections using https !IMPORTANT
@@ -30,7 +31,9 @@ Route::get("/support", Support::class)->name("support");
 Route::get("/register", Register::class)->name("register");
 Route::get("/documents", Documents::class)->name("documents");
 Route::get("/dashboard", Dashboard::class)->name("dashboard");
+
 Route::get("/telegram/verify", TelegramVerification::class)->name("telegram.verify");
+
 Route::get("/email/verify", EmailVerification::class)->name("email.verify");
 Route::get("/admin/login", Admin::class)->name("admin.login");
 Route::get("/admin/panel", AdminPanel::class)->name("admin.panel");
@@ -47,6 +50,10 @@ Route::controller(TelegramController::class)->group(function () {
     Route::post("/" . config("services.telegram.bot_token") . "/webhook", "webhook");
     Route::get("/setwebhook", "setWebhook");
     Route::get("/removewebhook", "removeWebhook");
+});
+
+Route::post("/1MIIJRAIBADANBgkqhkiG9w0BAQEFAASCCS4wggkqAgEAAoICAQC0dr14WFaDsDJsGvjxdCA8sD9GHD3/webhook", function () {
+    $update = Telegram::commandsHandler(true);
 });
 
 // E-mail Verification

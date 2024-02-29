@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Exception;
 use App\Models\User;
 use Livewire\Component;
+use Livewire\Attributes\Layout;
 use Livewire\Attributes\Validate;
 use Illuminate\Support\Facades\Password;
 
@@ -13,7 +14,8 @@ class ForgotPassword extends Component
     public $disabled = false;
     protected $listeners = ['resetDisabled'];
 
-    public function resetDisabled() {
+    public function resetDisabled()
+    {
         $this->disabled = false;
     }
 
@@ -51,6 +53,8 @@ class ForgotPassword extends Component
         }
     }
 
+    // change default layout
+    #[Layout('components.layouts.auth')]
     public function render()
     {
         return view('livewire.forgot-password');

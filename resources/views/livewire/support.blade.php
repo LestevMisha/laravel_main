@@ -10,9 +10,6 @@
         <table class="table mb-4 transactions-table">
             <thead>
                 <tr>
-                    <th scope="col">ID<br>
-                        <span class="fw-normal">корреспондента</span>
-                    </th>
                     <th scope="col">Время<br>
                         <span class="fw-normal">работы</span>
                     </th>
@@ -35,10 +32,7 @@
             </thead>
             <tbody>
                 <tr>
-                    <th class="fw-normal text-muted">
-                        <i>025</i>
-                    </th>
-                    <td>8:00-20:00 мск</td>
+                    <td>8-20 мск</td>
                     <td>example1.info@gmail.com</td>
                     <td>
                         <a href="#">@example_support1</a>
@@ -52,10 +46,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <th class="fw-normal text-muted">
-                        <i>108</i>
-                    </th>
-                    <td>8:00-20:00 мск</td>
+                    <td>8-20 мск</td>
                     <td>example2.info@gmail.com</td>
                     <td>
                         <a href="#">@example_support2</a>
@@ -69,10 +60,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <th class="fw-normal text-muted">
-                        <i>078</i>
-                    </th>
-                    <td>8:00-20:00 мск</td>
+                    <td>8-20 мск</td>
                     <td>example3.info@gmail.com</td>
                     <td>
                         <a href="#">@example_support3</a>
