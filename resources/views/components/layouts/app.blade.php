@@ -13,16 +13,13 @@
     <!-- +++++++++++ PROJECT CSS +++++++++++ -->
     <link href="{{ secure_asset('styles/different-components.css') }}" rel="stylesheet">
     <link href="{{ secure_asset('styles/main.css') }}" rel="stylesheet">
-    <link href="{{ secure_asset('styles/index.css') }}" rel="stylesheet">
-    {{-- custom modern --}}
-    <link href="{{ secure_asset('styles/modern.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('styles/light-mode.css') }}" rel="stylesheet">
     {{-- slick slider --}}
     <link href="{{ secure_asset('styles/slick-slider.css') }}" rel="stylesheet">
 
 </head>
 
 <body>
-
     {{-- Admin --}}
     {{-- @if (Auth::guard('admin')->check())
         @include('templates.header_admin')
@@ -37,7 +34,10 @@
     @endif --}}
     {{-- @include('templates.footer') --}}
 
-    {{ $slot }}
+    <div class="flex w100 h100">
+        <livewire:light-mode-on menu_type="top" />
+        {{ $slot }}
+    </div>
 
     <!-- +++++++++++ CDNs +++++++++++ -->
     {{-- jQuery/Mask jQuery --}}
@@ -48,8 +48,8 @@
     {{--  slick slider  --}}
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 
-
     <!-- +++++++++++ PROJECT JAVASCRIPT +++++++++++ -->
+    <script src="{{ secure_asset('javascript/light-mode.js') }}"></script>
     {{-- clipboard copy --}}
     <script src="{{ secure_asset('javascript/general.js') }}"></script>
     {{-- custom modern --}}

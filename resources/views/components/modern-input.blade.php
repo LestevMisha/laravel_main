@@ -1,12 +1,13 @@
+<?php $condition = $attr === 'password' || $attr === 'password_confirmation' || $attr === 'cvc'; ?>
 <label class="modern-wrapper" style="display: {{ $displayed ?? 'block' }}">
     <input wire:model="{{ $attr }}"
-        class="modern-input @if ($errors->any()) modern-input-error @endif"
-        type="{{ ($attr === 'password') || ($attr === 'password_confirmation') ? 'password' : 'text' }}" autocomplete="{{ $attr }}" autocorrect="off"
+        class="modern-input @if ($errors->has($attr)) modern-input-error @endif"
+        type="{{ $condition ? 'password' : 'text' }}" autocomplete="{{ $attr }}" autocorrect="off"
         autocapitalize="off" spellcheck="false" inputmode="{{ $attr }}" name="{{ $attr }}" placeholder=" "
         required>
-    <span class="modern-label @if ($errors->any()) modern-label-error @endif">{{ $title }}</span>
+    <span class="modern-label @if ($errors->has($attr)) modern-label-error @endif">{{ $title }}</span>
     <div class="right-content">
-        @if ($attr === 'password' || $attr === 'password_confirmation')
+        @if ($condition)
             <button class="password-button" type="button" onclick="passwordListener(event)">
                 <i class="eye-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">

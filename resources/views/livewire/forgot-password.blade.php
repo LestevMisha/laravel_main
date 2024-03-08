@@ -7,11 +7,23 @@
             @csrf
             <div class="flex v w100">
                 <x-modern-input attr="email" title="Email Адрес" />
-                <button class="go-button v1">Отправить Письмо</button>
+                <div>
+                    <x-modern-error />
+                </div>
+
+                <button id="timed_button" class="go-button v1" {{ $disabled ? 'disabled' : '' }}
+                    wire:loading.attr="disabled">Отправить
+                    Письмо</button>
+
+
 
                 @if (session()->has('success'))
-                    <div class="text-success mt-1">
+                    <div class="b-text b-text_green mt-1">
                         {{ session('success') }}
+                    </div>
+                    <div id="timer_wrapper" class="b-text b-text_grey b-text_08 {{ $disabled ? 'active' : '' }} mt-05">
+                        Следующий код:
+                        <span id="counter"></span>
                     </div>
                 @elseif (session()->has('failure'))
                     <div class="text-error more mt-1">
@@ -23,12 +35,37 @@
                         о смене пароля.</div>
                 @endif
 
-                <x-modern-error />
-                <a class="text-15px mt-1" href="https://mail.google.com/" target="_blank">Перейти в Gmail</a>
+
+
+                <a class="text-15px mt-1" href="https://mail.ru/" target="_blank">Перейти в Mail.ru</a>
             </div>
         </form>
 
     </div>
+
+    <script>
+        const btn = document.getElementById("timed_button");
+
+        document.addEventListener("DOMContentLoaded", function() {
+            Livewire.hook('morph.updated', ({
+                el
+            }) => {
+                if (el === btn) {
+                    if (el.disabled) {
+                        var count = 60,
+                            timer = setInterval(function() {
+                                $("#counter").html(`${count--} секунд`);
+                                if (count == 0) {
+                                    @this.call('resetDisabled');
+                                    clearInterval(timer);
+                                };
+                            }, 1000);
+                    }
+                }
+            })
+        })
+    </script>
+
 </div>
 
 

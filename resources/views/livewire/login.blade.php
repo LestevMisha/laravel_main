@@ -12,8 +12,10 @@
                 <button class="go-button v1">Войти</button>
                 <div class="flex h mt-24px space-btw">
                     <x-modern-remember />
-                    <a class="text-15px" href="{{ route('password.forgot') }}">Забыли Пароль?</a>
+                        <a class="text-15px" href="{{ route('password.forgot') }}">Забыли Пароль?</a>
                 </div>
+                <a class="text-15px mt-05" href="{{ route('register') }}">Регистрация</a>
+
             </div>
         </form>
 

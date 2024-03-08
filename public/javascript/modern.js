@@ -2,10 +2,17 @@ document.addEventListener('livewire:initialized', () => {
 
     // helper function
     const applyStyles = (label, input = null, isFocused = false) => {
-        const transformValue = isFocused || input?.validity?.valid ? "translateY(-10px) scale(0.87)" : "translateY(0) scale(1.0)";
-        const colorValue = isFocused || input?.validity?.valid ? "rgba(0, 0, 0, 0.8)" : "rgba(0, 0, 0, 1.0)";
-        label.setAttribute("style", `transform: ${transformValue} !important; color: ${colorValue} !important`);
+        // Remove previously added classes
+        label.classList.remove("active-trans", "inactive-trans", "active-color", "inactive-color");
+
+        // Add the appropriate classes based on the conditions
+        const transformValue = isFocused || input?.validity?.valid ? "active-trans" : "inactive-trans";
+        const colorValue = isFocused || input?.validity?.valid ? "active-color" : "inactive-color";
+
+        label.classList.add(transformValue);
+        label.classList.add(colorValue);
     };
+
 
     // helper function
     const main = () => {

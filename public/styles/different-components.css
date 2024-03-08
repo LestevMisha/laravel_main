@@ -22,9 +22,6 @@
     display: block;
     text-decoration: none;
     color: #0d6efd;
-    transition-duration: 0.25s;
-    transition-property: color, scale;
-    transition-timing-function: ease-in;
 }
 
 .morelink:hover {
@@ -145,7 +142,6 @@ body {
     text-align: left;
     padding: 1em;
     border: 0.2em solid #353535;
-    transition: 0.225s ease-in;
     transform: translate(0, 0);
     width: 100%;
     margin-bottom: 1em;

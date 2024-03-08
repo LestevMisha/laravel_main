@@ -62,8 +62,6 @@ class Login extends Component
         return $this->authService->check();
     }
 
-    // change default layout
-    #[Layout('components.layouts.auth')]
     public function render()
     {
         return view('livewire.login');

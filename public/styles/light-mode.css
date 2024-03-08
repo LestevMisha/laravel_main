@@ -1,0 +1,171 @@
+@charset "UTF-8";
+
+div,
+img,
+svg,
+section,
+body,
+a,
+svg,
+i,
+.modern-input,
+label,
+button,
+span,
+::before,
+::after {
+    transition-property: transform, filter, scale, color, background-color, opacity;
+    transition-duration: 0.25s;
+    transition-timing-function: ease-in-out;
+}
+
+/* LIGHT MODE */
+
+/* Change Autocomplete styles in Chrome*/
+body:has(.light-mode-applied) input:-webkit-autofill,
+body:has(.light-mode-applied) input:-webkit-autofill:hover,
+body:has(.light-mode-applied) input:-webkit-autofill:focus,
+body:has(.light-mode-applied) textarea:-webkit-autofill,
+body:has(.light-mode-applied) textarea:-webkit-autofill:hover,
+body:has(.light-mode-applied) textarea:-webkit-autofill:focus,
+body:has(.light-mode-applied) select:-webkit-autofill,
+body:has(.light-mode-applied) select:-webkit-autofill:hover,
+body:has(.light-mode-applied) select:-webkit-autofill:focus {
+    opacity: 1;
+}
+
+body:has(.light-mode-applied) {
+    background-color: #ffffff;
+}
+
+body:has(.light-mode-applied) .b-text {
+    color: #000;
+}
+
+body:has(.light-mode-applied) .text-header {
+    color: #000;
+}
+
+
+body:has(.light-mode-applied) h1 {
+    color: #000;
+}
+
+body:has(.light-mode-applied) .b-section {
+    background-color: #f6f7f8;
+}
+
+body:has(.light-mode-applied) .card {
+    background-color: #f6f7f8;
+}
+
+body:has(.light-mode-applied) .card_v3 {
+    background-color: #ffffff;
+}
+
+body:has(.light-mode-applied) .side-container {
+    background-color: #ffffff;
+}
+
+body:has(.light-mode-applied) .card.card_v2 {
+    background-color: #f6f7f8;
+}
+
+body:has(.light-mode-applied) .overlay {
+    background-color: #ffffff;
+}
+
+body:has(.light-mode-applied) .b-section.b-section_v2 {
+    background-color: #ffffff;
+}
+
+body:has(.light-mode-applied) .b-img.b-img_v9 {
+    filter: invert(0);
+}
+
+body:has(.light-mode-applied) color-scheme-switcher input[type='checkbox'] {
+    background-color: #eee;
+}
+
+body:has(.light-mode-applied) color-scheme-switcher .toggle-circle {
+    background-color: #FFFFFF;
+    border-color: #eee;
+}
+
+body:has(.light-mode-applied) .close-button {
+    background-color: rgba(0, 0, 0, .08);
+}
+
+body:has(.light-mode-applied) .close-icon,
+body:has(.light-mode-applied) .reload-icon {
+    color: rgb(0 0 0);
+}
+
+body:has(.light-mode-applied) .flex.v1 {
+    background-color: #f8f7f6;
+}
+
+body:has(.light-mode-applied) .flex.v2 {
+    background-color: #FFFFFF;
+    border: none;
+}
+
+body:has(.light-mode-applied) .flex.v3 {
+    background-color: #FFFFFF;
+}
+
+body:has(.light-mode-applied) .form-wrapper {
+    background-color: #FFFFFF;
+    border: none;
+}
+
+body:has(.light-mode-applied) h1 {
+    color: #000000;
+}
+
+body:has(.light-mode-applied) .modern-input {
+    background-color: #ecf1f7;
+    color: #000;
+}
+
+body:has(.light-mode-applied) .active-color {
+    color: rgba(0, 0, 0, 1);
+}
+
+body:has(.light-mode-applied) .inactive-color {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+body:has(.light-mode-applied) .modern-input:focus~.modern-label,
+body:has(.light-mode-applied) .modern-input:valid~.modern-label {
+    transform: translateY(-10px) scale(0.87);
+    color: rgba(0, 0, 0, 0.8);
+}
+
+body:has(.light-mode-applied) .reset-icon {
+    color: rgba(0, 0, 0, .4);
+}
+
+body:has(.light-mode-applied) .eye-icon {
+    color: rgba(0, 0, 0, .4);
+}
+
+
+body:has(.light-mode-applied) .modern-input:focus {
+    background-color: rgba(0, 0, 0, 0);
+    box-shadow: inset 0 0 0 1px #000;
+    -webkit-appearance: none;
+}
+
+body:has(.light-mode-applied) .modern-label.modern-label-error {
+    color: rgba(0, 0, 0, .54) !important;
+}
+
+body:has(.light-mode-applied) .modern-input.modern-input-error {
+    background-color: rgba(224, 31, 25, .16);
+}
+
+body:has(.light-mode-applied) .modern-input.modern-input-error:focus {
+    box-shadow: inset 0 0 0 1px #e31c1c;
+    background-color: #ffffff00 !important;
+}

@@ -48,4 +48,15 @@ document.addEventListener("DOMContentLoaded", function () {
     $(".menu-btn").on("click", () => {
         $(".side-container").toggleClass("active");
     });
+
+    var modern_date = document.querySelector(".modern-input.date");
+    if (modern_date) {
+        document.querySelector(".modern-input.date").addEventListener('input', function (event) {
+            let inputValue = event.target.value.replace(/\D/g, ''); // Remove non-numeric characters
+            if (inputValue.length > 2) {
+                inputValue = inputValue.substring(0, 2) + '/' + inputValue.substring(2);
+            }
+            event.target.value = inputValue;
+        });
+    }
 });

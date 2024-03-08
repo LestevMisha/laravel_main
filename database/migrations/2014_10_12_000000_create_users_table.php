@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('uuid')->unique();
 
             $table->integer('days_left')->default(0);
+            $table->integer('is_paid_10K')->default(0);
 
             $table->string('name');
             $table->string('email')->unique();

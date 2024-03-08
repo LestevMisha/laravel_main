@@ -7,7 +7,7 @@
             {{ $this->generateQRCode($this->getLink()) }}
         </i>
 
-        <div class="text-center mb-1">Отсканируйте QR-код с устройства, на котором установлен Telegram, или нажмите на
+        <div class="b-text b-text_center mb-1">Отсканируйте QR-код с устройства, на котором установлен Telegram, или нажмите на
             кнопку</div>
         <a target="blank" href="{{ $this->getLink() }}" style="text-decoration: none;" class="go-button mb-1">
             <div class="">
@@ -15,8 +15,8 @@
             </div>
         </a>
         <div class="info-box mb-1">
-            <p class="text-grey">Вы будете перенаправлены к нашему боту. Там будет кнопка
-                <span class="text_dark-blue">Start</span>. Нажмите на нее.
+            <p class="b-text b-text_grey-dark">Вы будете перенаправлены к нашему боту. Там будет кнопка
+                <span class="b-text b-text_blue">Start</span>. Нажмите на нее.
             </p>
             <i class="arrow-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="52" height="66" viewBox="0 0 52 66" fill="none"
@@ -34,29 +34,4 @@
             Удалить регистрацию
         </div>
     </div>
-
-    {{-- <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-
-        <main class="px-3">
-            <h1>Проверьте свой Телеграм</h1>
-            <p class="lead">
-                <b>Перед тем как закончить регистрацию напишите любое слово нашему боту</b>
-                <i>
-                    <b>
-                        <a href="https://t.me/marathon_test13_bot" style="text-decoration: none;">@marathon_test13_bot</a>
-                    </b>
-                </i>
-            </p>
-            <p class="lead" style="font-size: 1em;">
-                Если вы ввели неверный <i>Телеграм Никнейм</i> при регистрации, бот напишет ошибку. В таком
-                случае начните <a href=" {{ route('register') }} ">регистрацию</a> заново и введите правильный
-                <i>Телеграм Никнейм</i>. В случае если вы <u>хотите войти в существующий аккаунт</u> перейдите в <a href=" {{ route('register') }} ">регистрацию</a>, и от туда перейдите в Логин (Войти) панель.
-            </p>
-            <div class="text-danger lead mb-3" style="font-size: 1em;"><b>Внимание!</b> Нажимая на <u>регистрацию</u> вы теряете весь
-                прогресс! Вернуться обратно уже будет невозможно.</div>
-
-            <button onclick="document.location.href='https://t.me/marathon_test13_bot'"
-                class="btn btn-primary">Написать</button>
-        </main>
-    </div> --}}
 </div>

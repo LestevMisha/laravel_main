@@ -48,6 +48,8 @@ class Register extends Component
 
     public function previousStep()
     {
+        $this->resetErrorBag();
+        $this->resetValidation();
         $this->currentStep--;
         session()->put("currentStep", $this->currentStep);
     }
@@ -111,8 +113,6 @@ class Register extends Component
         return $this->authService->check();
     }
 
-    // change default layout
-    #[Layout('components.layouts.auth')]
     public function render()
     {
         return view('livewire.register');

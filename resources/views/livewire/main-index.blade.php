@@ -8,9 +8,7 @@
                 <div class="b-text b-text_3.5em b-text_900 b-text_center b-text_grey mt-1">КЛУБ</div>
                 <div class="b-text b-text_4.5em b-text_900 b-text_center b-text_v2">START</div>
                 <div class="b-text b-text_1.3em b-text_center mt-2">
-                    <strong>
-                        Закрытый и конфиденциальный
-                        клуб</strong>
+                    Закрытый и конфиденциальный клуб
                     <br>
                     для продаж кроссовок по дропшиппингу
                 </div>
@@ -60,9 +58,9 @@
                         </i>
                         <div class="b-text b-text_1.3em b-text_700">Без вложений в товар</div>
                     </div>
-                </div>l
+                </div>
 
-                <div class="card mt-2">
+                <div class="card card_v3 mt-2">
                     <div class="b-text b-text_1.3em b-text_center">Ежемесячная подписка на <br>"КЛУБ START"
                     </div>
                     <div class="b-text b-text_grey b-text_center">Вход: 10 000 рублей</div>
@@ -91,49 +89,56 @@
             <div class="flex h gap-2 mt-4 mob">
                 <div class="flex v gap-2">
                     <div class="flex h align">
-                        <div class="b-text b-text_2em b-text_700 b-text_v1 mr-2"><span
-                                class="blue-circle-offset"></span>1</div>
+                        <div class="b-text b-text_2em b-text_700 b-text_v1 w mr-2"><span
+                                class="blue-circle-offset"></span>1
+                        </div>
                         <div class="b-text b-text_1.3em">Доставляем кроссовки от 1 пары - дропшиппинг.</div>
                     </div>
                     <div class="flex h align">
-                        <div class="b-text b-text_2em b-text_700 b-text_v1 mr-2"><span
-                                class="blue-circle-offset"></span>3</div>
+                        <div class="b-text b-text_2em b-text_700 b-text_v1 w mr-2"><span
+                                class="blue-circle-offset"></span>3
+                        </div>
                         <div class="b-text b-text_1.3em">310 моделей кроссовок в ассортименте.</div>
                     </div>
                     <div class="flex h align">
-                        <div class="b-text b-text_2em b-text_700 b-text_v1 mr-2"><span
-                                class="blue-circle-offset"></span>5</div>
+                        <div class="b-text b-text_2em b-text_700 b-text_v1 w mr-2"><span
+                                class="blue-circle-offset"></span>5
+                        </div>
                         <div class="b-text b-text_1.3em">Фотографии кроссовок без водяных знаков в оригинальном
                             качестве.
                         </div>
                     </div>
                     <div class="flex h align">
-                        <div class="b-text b-text_2em b-text_700 b-text_v1 mr-2"><span
-                                class="blue-circle-offset"></span>7</div>
+                        <div class="b-text b-text_2em b-text_700 b-text_v1 w mr-2"><span
+                                class="blue-circle-offset"></span>7
+                        </div>
                         <div class="b-text b-text_1.3em">Отслеживание моделей на складе - таблица с размерами.</div>
                     </div>
                 </div>
                 <div class="flex v gap-2">
                     <div class="flex h align">
-                        <div class="b-text b-text_2em b-text_700 b-text_v1 mr-2"><span
-                                class="blue-circle-offset"></span>2</div>
+                        <div class="b-text b-text_2em b-text_700 b-text_v1 w mr-2"><span
+                                class="blue-circle-offset"></span>2
+                        </div>
                         <div class="b-text b-text_1.3em">Отправка кроссовок доступна из двух мест - Краснодар и Москва.
                         </div>
                     </div>
                     <div class="flex h align">
-                        <div class="b-text b-text_2em b-text_700 b-text_v1 mr-2"><span
-                                class="blue-circle-offset"></span>4</div>
+                        <div class="b-text b-text_2em b-text_700 b-text_v1 w mr-2"><span
+                                class="blue-circle-offset"></span>4
+                        </div>
                         <div class="b-text b-text_1.3em">Создаем контент для социальных сетей с нашими кроссовками.
                         </div>
                     </div>
                     <div class="flex h align">
-                        <div class="b-text b-text_2em b-text_700 b-text_v1 mr-2"><span
-                                class="blue-circle-offset"></span>6</div>
+                        <div class="b-text b-text_2em b-text_700 b-text_v1 w mr-2"><span
+                                class="blue-circle-offset"></span>6
+                        </div>
                         <div class="b-text b-text_1.3em">Эффективные методы продвижения обуви с опытным таргетологом.
                         </div>
                     </div>
                     <div class="flex h align">
-                        <div class="b-text b-text_2em b-text_700 b-text_v1 mr-2"><span
+                        <div class="b-text b-text_2em b-text_700 b-text_v1 w mr-2"><span
                                 class="blue-circle-offset"></span>8</div>
                         <div class="b-text b-text_1.3em">Закрытое сообщество в Телеграме для наших клиентов.</div>
                     </div>
@@ -227,7 +232,7 @@
         <div class="container container_v2 mob">
             <div class="b-text b-text_2.5em b-text_900 b-text_center py-3">ПРАЙС-ЛИСТ
             </div>
-            <div class="slider mb-3">
+            <div wire:ignore class="slider mb-3">
                 <img src="{{ URL::asset('images/price-list/sn1.jpg') }}" alt="sn1" class="b-img b-img_v5">
                 <img src="{{ URL::asset('images/price-list/sn2.jpg') }}" alt="sn2" class="b-img b-img_v5">
                 <img src="{{ URL::asset('images/price-list/sn3.jpg') }}" alt="sn3" class="b-img b-img_v5">
@@ -285,7 +290,7 @@
             <div class="h-margin">
                 <div class="container container_width_1400px">
                     <div class="b-block_animation-disabled b-block_v-1">
-                        <div class="b-text b-text_1.3em b-text_700 b-text_center">Что такое клуб?</div>
+                        <div class="b-text b-text_1.3em b-text_700 b-text_center w">Что такое клуб?</div>
                     </div>
                 </div>
                 <div class="container container_width_1400px">
@@ -303,7 +308,7 @@
             <div class="h-margin">
                 <div class="container container_width_1400px">
                     <div class="b-block_animation-disabled b-block_v-1">
-                        <div class="b-text b-text_1.3em b-text_700 b-text_center">В чем суть клуба?</div>
+                        <div class="b-text b-text_1.3em b-text_700 b-text_center w">В чем суть клуба?</div>
                     </div>
                 </div>
 
@@ -324,7 +329,7 @@
             <div class="h-margin">
                 <div class="container container_width_1400px">
                     <div class="b-block_animation-disabled b-block_v-1">
-                        <div class="b-text b-text_1.3em b-text_700 b-text_center">Что такое дропшиппинг?</div>
+                        <div class="b-text b-text_1.3em b-text_700 b-text_center w">Что такое дропшиппинг?</div>
                     </div>
                 </div>
                 <div class="container container_width_1400px">
@@ -340,7 +345,7 @@
             <div class="h-margin">
                 <div class="container container_width_1400px">
                     <div class="b-block_animation-disabled b-block_v-1">
-                        <div class="b-text b-text_1.3em b-text_700 b-text_center">В каких странах можно работать?
+                        <div class="b-text b-text_1.3em b-text_700 b-text_center w">В каких странах можно работать?
                         </div>
                     </div>
                 </div>
@@ -355,7 +360,7 @@
             </div>
             <div class="container container_width_1400px">
                 <div class="b-block_animation-disabled b-block_v-1">
-                    <div class="b-text b-text_1.3em b-text_700 b-text_center">Возрастные ограничения</div>
+                    <div class="b-text b-text_1.3em b-text_700 b-text_center w">Возрастные ограничения</div>
                 </div>
             </div>
             <div class="container container_width_1400px">
@@ -381,7 +386,7 @@
         <div class="container container_v2 mob">
             <div class="b-text b-text_2.5em b-text_900 b-text_center mb-3">АВТОР КЛУБА</div>
 
-            <div class="slider_v2 mb-3">
+            <div wire:ignore class="slider_v2 mb-3">
                 <img src="{{ URL::asset('images/authors-photos/photo-1.jpeg') }}" alt="photo-1"
                     class="b-img b-img_v5">
                 <img src="{{ URL::asset('images/authors-photos/photo-2.png') }}" alt="photo-2"
@@ -408,4 +413,5 @@
             </div>
         </div>
     </section>
+
 </div>

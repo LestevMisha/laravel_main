@@ -5,6 +5,7 @@ composer require livewire/livewire
 composer require irazasyed/telegram-bot-sdk
 php artisan vendor:publish --tag="telegram-config"
 composer require simplesoftwareio/simple-qrcode "~4"
+composer require guzzlehttp/guzzle
 
 
 for differ languages:

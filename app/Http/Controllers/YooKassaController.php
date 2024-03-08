@@ -94,19 +94,25 @@ class YooKassaController extends Controller
                 $tg = new TelegramController();
 
                 if (isset($metadata->transaction_id)) {
-                    $transactionId =  (int)$metadata->transaction_id;
+                    $transactionId = (int)$metadata->transaction_id;
+
+                    // update transaction
                     $transaction = UsersTransactions::find($transactionId);
                     $transaction->status = "succeeded";
                     $transaction->payment_method_id = $payment->payment_method->id;
                     $transaction->save();
-
                     // user + 30 days
                     $user = User::where("uuid", $transaction->uuid)->first();
                     $user->days_left = (int)$user->days_left + 30;
+                    // check if user made first enterance payment, if so set his is_paid_10K status to 1 (true)
+                    if (isset($metadata->is_paid_10K)) {
+                        $user->is_paid_10K = $metadata->is_paid_10K;
+                    }
                     $user->save();
                     // unban if banned
                     $tg->unbanChatMember(config("services.telegram.group_id"), $user->telegram_id);
                 }
+
                 // handle recurrent payments
                 if ($metadata->isRecurrent) {
                     // add to database

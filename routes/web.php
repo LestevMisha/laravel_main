@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\TelegramController;
 use App\Livewire\Admin;
 use App\Livewire\Error;
-use App\Livewire\Index;
+use App\Livewire\MainIndex;
 use App\Livewire\Login;
 use App\Livewire\Support;
 use App\Livewire\Register;
@@ -17,20 +18,30 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\TelegramVerification;
 use Telegram\Bot\Laravel\Facades\Telegram;
-use App\Http\Controllers\TelegramController;
 use App\Http\Controllers\YooKassaController;
+use App\Livewire\CardCredentials;
+use App\Livewire\Profile;
+use App\Livewire\ReferralTransactions;
+use App\Livewire\Settings;
+use App\Livewire\Transactions;
+
 // make all redirections using https !IMPORTANT
 URL::forceScheme("https");
 
 
 // Pages
-Route::get('/', Index::class)->name("main");
+Route::get('/', MainIndex::class)->name("main");
 Route::get("/login", Login::class)->name("login");
 Route::get("/error", Error::class)->name("error");
 Route::get("/support", Support::class)->name("support");
 Route::get("/register", Register::class)->name("register");
 Route::get("/documents", Documents::class)->name("documents");
 Route::get("/dashboard", Dashboard::class)->name("dashboard");
+Route::get("/transactions", Transactions::class)->name("transactions");
+Route::get("/referral-transactions", ReferralTransactions::class)->name("referral.transactions");
+Route::get("/profile", Profile::class)->name("profile");
+Route::get("/settings", Settings::class)->name("settings");
+Route::get("/card-credentials", CardCredentials::class)->name("card-credentials");
 
 Route::get("/telegram/verify", TelegramVerification::class)->name("telegram.verify");
 
@@ -46,15 +57,36 @@ Route::post("/logout/admin", [ModelService::class, "logout_admin"])->name("logou
 
 
 // Telegram Verification
+// use App\Http\Controllers\TelegramController;
+// Route::controller(TelegramController::class)->group(function () {
+//     // Route::post("/" . config("services.telegram.bot_token") . "/webhook", "webhook");
+//     // Route::get("/setwebhook", "setWebhook");
+//     // Route::get("/removewebhook", "removeWebhook");
+// });
+
+// Route::post("/1MIIJRAIBADANBgkqhkiG9w0BAQEFAASCCS4wggkqAgEAAoICAQC0dr14WFaDsDJsGvjxdCA8sD9GHD3/webhook", function () {
+//     $update = Telegram::commandsHandler(true);
+//     logger("here");
+//     logger($update);
+// });
+
 Route::controller(TelegramController::class)->group(function () {
-    Route::post("/" . config("services.telegram.bot_token") . "/webhook", "webhook");
     Route::get("/setwebhook", "setWebhook");
     Route::get("/removewebhook", "removeWebhook");
+    Route::post("/1MIIJRAIBADANBgkqhkiG9w0BAQEFAASCCS4wggkqAgEAAoICAQC0dr14WFaDsDJsGvjxdCA8sD9GHD3/webhook", "handle");
 });
 
-Route::post("/1MIIJRAIBADANBgkqhkiG9w0BAQEFAASCCS4wggkqAgEAAoICAQC0dr14WFaDsDJsGvjxdCA8sD9GHD3/webhook", function () {
-    $update = Telegram::commandsHandler(true);
-});
+// Route::get("/setwebhook",function () {
+//     $url = config("services.website.url") . "/1MIIJRAIBADANBgkqhkiG9w0BAQEFAASCCS4wggkqAgEAAoICAQC0dr14WFaDsDJsGvjxdCA8sD9GHD3/webhook";
+//     Telegram::setWebhook([
+//         "url" => $url
+//     ]);
+// });
+
+// Route::get("/removewebhook",function () {
+//     Telegram::removeWebhook();
+// });
+
 
 // E-mail Verification
 Route::controller(EmailVerification::class)->group(function () {

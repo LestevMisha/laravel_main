@@ -4,6 +4,7 @@ namespace App\Telegram\Commands;
 
 use DateTime;
 use App\Models\User;
+use App\Services\TelegramService;
 use Telegram\Bot\Commands\Command;
 use Telegram\Bot\Laravel\Facades\Telegram;
 
@@ -15,6 +16,29 @@ class StartCommand extends Command
     public function handle()
     {
         $updates = $this->getUpdate();
+        $user_id = $updates["message"]["from"]["id"];
+
+        // get params
+        $params = explode("_", $updates["message"]["text"]);
+        $uuid = explode(" ", $params[0])[1];
+
+        // get user
+        $user = User::where("telegram_id", $user_id)->first();
+
+        if ($params[1] === "telegram-verification") {
+            $this->telegramVerification($updates);
+        } else if ($params[1] === "changeEmail") {
+            $tgService = new TelegramService();
+            $text = $tgService->markdownv2("*$user->name* ваша текущая почта $user->email. Чтобы изменить текущюю почту напишите /changeEmail пробел <новая почта>, пример: `/changeEmail example@mail.ru.`");
+            $this->replyWithMessage([
+                'text' => $text,
+                'parse_mode' => "MarkdownV2",
+            ]);
+        }
+    }
+
+    private function telegramVerification($updates)
+    {
         $activation = $updates["message"]["text"];
         $new_user = $updates['message']['from'];
         $name = $new_user['first_name'] . " " . $new_user['last_name'];
@@ -27,7 +51,7 @@ class StartCommand extends Command
 
             // Check if this telegram was used, if so REPLY
             if (User::where("telegram_id", $id)->exists()) {
-                $this->replyWithMessage(['text' => "Хм.. 🤔 этот аккаунт уже был зарегестрирован, попробуйте войдите в профиль тут 👉 https://misha.loca.lt/login"]);
+                $this->replyWithMessage(['text' => "Хм.. 🤔 этот аккаунт уже был зарегестрирован, попробуйте войти в профиль тут 👉 https://misha.loca.lt/login"]);
                 return;
             }
 
@@ -44,8 +68,8 @@ class StartCommand extends Command
 
 
         try {
-            // if chatMember wasn't found throw an error
-            $chatMember = Telegram::getChatMember([
+            // if chatMember ($_) wasn't found throw an error
+            $_ = Telegram::getChatMember([
                 'chat_id' => config("services.telegram.group_id"),
                 'user_id' => $id,
             ]);

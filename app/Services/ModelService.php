@@ -2,9 +2,10 @@
 
 namespace App\Services;
 
-use App\Models\CardCredentials;
 use App\Models\User;
+use App\Models\UsersImages;
 use Illuminate\Support\Str;
+use App\Models\CardCredentials;
 use App\Models\UsersTransactions;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -15,13 +16,6 @@ class ModelService
 
     public function createUser($name, $email, $password)
     {
-
-        // if (Auth::check()) {
-        //     $uuid = Auth::user()->uuid;
-        // } else {
-        //     $uuid = Str::uuid()->toString();
-        // }
-
         return User::create([
             'uuid' => Str::uuid()->toString(),
             'referral_id' => Str::uuid()->toString(),
@@ -55,29 +49,28 @@ class ModelService
         session()->flush();
     }
 
-    public function createTransaction($uuid, $email, $telegram_id, $ip, $amount, $description, $referral_id = "", $getConfirmation = true)
+    public function createTransaction($user, $amount, $description, $options = [], $referral_id = "", $getConfirmation = true)
     {
 
         $transaction = UsersTransactions::create([
-            "uuid" => $uuid,
+            "uuid" => $user->uuid,
 
-            "email" => $email,
-            "telegram_id" => $telegram_id,
+            "email" => $user->email,
+            "telegram_id" => $user->telegram_id,
             "referral_id" => $referral_id,
 
-            "ip" => $ip,
+            "ip" => $user->ip,
 
             "amount" => $amount,
             "description" => $description,
         ]);
 
-        // return url for yopkassa redirect
+        // return url for yookassa redirect
         if ($getConfirmation) {
             $authService = new AuthService();
             if ($transaction) {
-                $payment = $authService->createPayment($amount, $description, [
-                    "transaction_id" => $transaction->id,
-                ]);
+                $options["transaction_id"] = $transaction->id;
+                $payment = $authService->createPayment($amount, $description, $options);
                 // set yookassa_transaction_id & status columns
                 $transaction->yookassa_transaction_id = $payment->id;
                 $transaction->status = $payment->status;
@@ -108,5 +101,18 @@ class ModelService
         Auth::guard('admin')->logout();
         return redirect()->route('login');
         // return redirect()->route('login')->withErrors(["email" => 'Вы успешно вышли из аккаунта.'])->onlyInput("email");
+    }
+
+    public function hasImage()
+    {
+        return UsersImages::where("uuid", Auth::user()->uuid)->exists();
+    }
+
+    public function createImage($uuid, $image_data)
+    {
+        return UsersImages::create([
+            'uuid' => $uuid,
+            'image_data' => $image_data,
+        ]);
     }
 }

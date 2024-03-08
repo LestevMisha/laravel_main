@@ -59,8 +59,6 @@ class ResetPassword extends Component
         $this->email = request()->email;
     }
 
-    # change default layout
-    #[Layout("components.layouts.auth")]
     public function render()
     {
         return view('livewire.reset-password');

@@ -38,10 +38,10 @@ class ForgotPassword extends Component
 
         try {
             if ($this->disabled === false) {
-                $this->disabled = true;
                 $email = $this->email;
                 $status = Password::sendResetLink(compact('email'));
                 if ($status === Password::RESET_LINK_SENT) {
+                    $this->disabled = true;
                     session()->flash('success', __($status));
                 } else {
                     session()->flash('failure', __($status));
@@ -53,8 +53,6 @@ class ForgotPassword extends Component
         }
     }
 
-    // change default layout
-    #[Layout('components.layouts.auth')]
     public function render()
     {
         return view('livewire.forgot-password');
