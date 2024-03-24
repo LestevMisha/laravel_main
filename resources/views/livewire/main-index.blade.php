@@ -61,11 +61,11 @@
                 </div>
 
                 <div class="card card_v3 mt-2">
-                    <div class="b-text b-text_1.3em b-text_center">Ежемесячная подписка на <br>"КЛУБ START"
+                    <div class="b-text b-text_1.3em b-text_center">Единоразавая подписка на <br>"КЛУБ START"
                     </div>
                     <div class="b-text b-text_grey b-text_center">Вход: 10 000 рублей</div>
                     <a class="go-button v2" href="{{ route('register') }}">Вступить в Клуб</a>
-                    <img class="b-img b-img_v3 mt-1" src="{{ URL::asset('images/sneaker.png') }}" alt="sneaker">
+                    <img class="b-img b-img_v3" src="{{ URL::asset('images/sneaker-main.png') }}" alt="sneaker">
                 </div>
             </div>
         </div>
@@ -89,19 +89,19 @@
             <div class="flex h gap-2 mt-4 mob">
                 <div class="flex v gap-2">
                     <div class="flex h align">
-                        <div class="b-text b-text_2em b-text_700 b-text_v1 w mr-2"><span
+                        <div class="b-text b-text_2em b-text_700 b-text_v1 mr-2"><span
                                 class="blue-circle-offset"></span>1
                         </div>
                         <div class="b-text b-text_1.3em">Доставляем кроссовки от 1 пары - дропшиппинг.</div>
                     </div>
                     <div class="flex h align">
-                        <div class="b-text b-text_2em b-text_700 b-text_v1 w mr-2"><span
+                        <div class="b-text b-text_2em b-text_700 b-text_v1 mr-2"><span
                                 class="blue-circle-offset"></span>3
                         </div>
                         <div class="b-text b-text_1.3em">310 моделей кроссовок в ассортименте.</div>
                     </div>
                     <div class="flex h align">
-                        <div class="b-text b-text_2em b-text_700 b-text_v1 w mr-2"><span
+                        <div class="b-text b-text_2em b-text_700 b-text_v1 mr-2"><span
                                 class="blue-circle-offset"></span>5
                         </div>
                         <div class="b-text b-text_1.3em">Фотографии кроссовок без водяных знаков в оригинальном
@@ -109,7 +109,7 @@
                         </div>
                     </div>
                     <div class="flex h align">
-                        <div class="b-text b-text_2em b-text_700 b-text_v1 w mr-2"><span
+                        <div class="b-text b-text_2em b-text_700 b-text_v1 mr-2"><span
                                 class="blue-circle-offset"></span>7
                         </div>
                         <div class="b-text b-text_1.3em">Отслеживание моделей на складе - таблица с размерами.</div>
@@ -117,28 +117,28 @@
                 </div>
                 <div class="flex v gap-2">
                     <div class="flex h align">
-                        <div class="b-text b-text_2em b-text_700 b-text_v1 w mr-2"><span
+                        <div class="b-text b-text_2em b-text_700 b-text_v1 mr-2"><span
                                 class="blue-circle-offset"></span>2
                         </div>
                         <div class="b-text b-text_1.3em">Отправка кроссовок доступна из двух мест - Краснодар и Москва.
                         </div>
                     </div>
                     <div class="flex h align">
-                        <div class="b-text b-text_2em b-text_700 b-text_v1 w mr-2"><span
+                        <div class="b-text b-text_2em b-text_700 b-text_v1 mr-2"><span
                                 class="blue-circle-offset"></span>4
                         </div>
                         <div class="b-text b-text_1.3em">Создаем контент для социальных сетей с нашими кроссовками.
                         </div>
                     </div>
                     <div class="flex h align">
-                        <div class="b-text b-text_2em b-text_700 b-text_v1 w mr-2"><span
+                        <div class="b-text b-text_2em b-text_700 b-text_v1 mr-2"><span
                                 class="blue-circle-offset"></span>6
                         </div>
                         <div class="b-text b-text_1.3em">Эффективные методы продвижения обуви с опытным таргетологом.
                         </div>
                     </div>
                     <div class="flex h align">
-                        <div class="b-text b-text_2em b-text_700 b-text_v1 w mr-2"><span
+                        <div class="b-text b-text_2em b-text_700 b-text_v1 mr-2"><span
                                 class="blue-circle-offset"></span>8</div>
                         <div class="b-text b-text_1.3em">Закрытое сообщество в Телеграме для наших клиентов.</div>
                     </div>
@@ -243,41 +243,32 @@
                 <img src="{{ URL::asset('images/price-list/sn8.jpg') }}" alt="sn8" class="b-img b-img_v5">
             </div>
 
-            {{-- <div class="b-text b-text_2.5em b-text_900 b-text_center mb-3">СРЕДНИЙ ДОХОД<br>С 1 ПРОДАЖИ</div> --}}
-
-            <div class="flex v gap my-1">
-
-                <div class="flex h">
-                    <div class="b-text b-text_nowrap">Себестоимость</div>
-                    <span class="border-dot"></span>
-                    <div class="b-text b-text_nowrap">3 000 руб.</div>
+            <div class="flex h gap flex_wrap">
+                <img src="{{ URL::asset('images/sneakers-box.jpg') }}" alt="sneakers-box" class="b-img b-img_v1a">
+                <div class="b-circle-wrapper">
+                    <div class="b-text b-text_2em b-text_700 b-text_v1 b-text_v1.0">1 ШАГ</div>
+                    {{-- <div class="b-circle">Выбор ниши</div> --}}
                 </div>
-
-                <div class="flex h space-btw">
-                    <div class="b-text b-text_nowrap">Стоимость заявки</div>
-                    <span class="border-dot"></span>
-                    <div class="b-text b-text_nowrap">300 руб.</div>
+                <x-arrow-step-icon />
+                <div class="b-circle-wrapper">
+                    <div class="b-text b-text_2em b-text_700 b-text_v1 b-text_v1.0">2 ШАГ</div>
+                    {{-- <div class="b-circle">Поиск надежных поставщиков</div> --}}
                 </div>
-
-                <div class="flex h space-btw">
-                    <div class="b-text b-text_nowrap">Доставка</div>
-                    <span class="border-dot"></span>
-                    <div class="b-text b-text_nowrap">250 руб.</div>
+                <x-arrow-step-icon />
+                <div class="b-circle-wrapper">
+                    <div class="b-text b-text_2em b-text_700 b-text_v1 b-text_v1.0">3 ШАГ</div>
+                    {{-- <div class="b-circle">Создание интернет-магазина</div> --}}
                 </div>
-
-                <div class="flex h space-btw">
-                    <div class="b-text b-text_nowrap">Маржа</div>
-                    <span class="border-dot"></span>
-                    <div class="b-text b-text_nowrap">3 000 руб.</div>
+                <x-arrow-step-icon />
+                <div class="b-circle-wrapper">
+                    <div class="b-text b-text_2em b-text_700 b-text_v1 b-text_v1.0">4 ШАГ</div>
+                    {{-- <div class="b-circle">Продвижение и маркетинг</div> --}}
                 </div>
-
-            </div>
-            <div class="b-text b-text_1.3em b-text_700">Чистая прибыль ≈ 2 450 руб.</div>
-            <div class="b-text b-text_1 3em my-1">Полный прайс-лист доступен только для участников клуба</div>
-            <div class="w50 mob">
-                <a class="go-button go-button_hover v2" href="{{ route('register') }}">Вступить в
-                    Клуб</a>
-                <img class="b-img b-img_v9" src="{{ URL::asset('images/cursor.png') }}" alt="">
+                <x-arrow-step-icon />
+                <div class="b-circle-wrapper">
+                    <div class="b-text b-text_2em b-text_700 b-text_v1 b-text_v1.0">5 ШАГ</div>
+                    {{-- <div class="b-circle">Обработка заказов</div> --}}
+                </div>
             </div>
         </div>
     </section>
@@ -358,16 +349,6 @@
                     </div>
                 </div>
             </div>
-            <div class="container container_width_1400px">
-                <div class="b-block_animation-disabled b-block_v-1">
-                    <div class="b-text b-text_1.3em b-text_700 b-text_center w">Возрастные ограничения</div>
-                </div>
-            </div>
-            <div class="container container_width_1400px">
-                <div class="card card_v2">
-                    <div class="b-text b-text_1.3em b-text_center">18+</div>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -384,24 +365,9 @@
 
 
         <div class="container container_v2 mob">
-            <div class="b-text b-text_2.5em b-text_900 b-text_center mb-3">АВТОР КЛУБА</div>
-
-            <div wire:ignore class="slider_v2 mb-3">
-                <img src="{{ URL::asset('images/authors-photos/photo-1.jpeg') }}" alt="photo-1"
-                    class="b-img b-img_v5">
-                <img src="{{ URL::asset('images/authors-photos/photo-2.png') }}" alt="photo-2"
-                    class="b-img b-img_v5">
-                <img src="{{ URL::asset('images/authors-photos/photo-3.png') }}" alt="photo-3"
-                    class="b-img b-img_v5">
-                <img src="{{ URL::asset('images/authors-photos/photo-4.png') }}" alt="photo-4"
-                    class="b-img b-img_v5">
-            </div>
-
+            
             <div class="b-text b-text_grey-dark b-text_center">
-                Всю информацию Даниил лично<br>
-                публикует в клубе в текстовом, аудио<br>
-                и видео форматах.<br>
-                Реквизиты<br><br>
+                Реквизиты<br>
                 ИП ШКИТОВ Д. А; идентификационный номер<br>
                 налогоплательщика (ИНН): 7707083893<br>
                 ОГРНИП: 322325600026496<br><br>

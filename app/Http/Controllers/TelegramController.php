@@ -15,6 +15,7 @@ class TelegramController extends Controller
 
     public function handle()
     {
+        logger("here");
         $update = Telegram::commandsHandler(true);
         $user_id = $update["message"]["from"]["id"];
 

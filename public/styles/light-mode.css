@@ -42,6 +42,10 @@ body:has(.light-mode-applied) .b-text {
     color: #000;
 }
 
+body:has(.light-mode-applied) .b-circle {
+    background-color: #c5c5c545;
+}
+
 body:has(.light-mode-applied) .text-header {
     color: #000;
 }
@@ -60,7 +64,8 @@ body:has(.light-mode-applied) .card {
 }
 
 body:has(.light-mode-applied) .card_v3 {
-    background-color: #ffffff;
+    background-color: #c7c7c721;
+    backdrop-filter: blur(6px);
 }
 
 body:has(.light-mode-applied) .side-container {

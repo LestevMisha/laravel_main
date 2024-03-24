@@ -4,3 +4,14 @@
 
 command: npx localtunnel --port 8000 --subdomain danielshkitov
 url: https://danielshkitov.loca.lt/
+
+
+brew services start httpd
+brew services start mysql
+php artisan serve
+npx localtunnel --port 8000 --subdomain danielshkitov
+
+open: https://misha.com:8443/
+open for webhook: https://danielshkitov.loca.lt/setwebhook
+open for db: mysql -u root
+use laravel4; show tables; describe users; select * from users;

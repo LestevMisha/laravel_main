@@ -15,30 +15,8 @@ class StartCommand extends Command
 
     public function handle()
     {
+        logger("start command");
         $updates = $this->getUpdate();
-        $user_id = $updates["message"]["from"]["id"];
-
-        // get params
-        $params = explode("_", $updates["message"]["text"]);
-        $uuid = explode(" ", $params[0])[1];
-
-        // get user
-        $user = User::where("telegram_id", $user_id)->first();
-
-        if ($params[1] === "telegram-verification") {
-            $this->telegramVerification($updates);
-        } else if ($params[1] === "changeEmail") {
-            $tgService = new TelegramService();
-            $text = $tgService->markdownv2("*$user->name* ваша текущая почта $user->email. Чтобы изменить текущюю почту напишите /changeEmail пробел <новая почта>, пример: `/changeEmail example@mail.ru.`");
-            $this->replyWithMessage([
-                'text' => $text,
-                'parse_mode' => "MarkdownV2",
-            ]);
-        }
-    }
-
-    private function telegramVerification($updates)
-    {
         $activation = $updates["message"]["text"];
         $new_user = $updates['message']['from'];
         $name = $new_user['first_name'] . " " . $new_user['last_name'];

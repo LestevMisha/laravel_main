@@ -11,7 +11,7 @@
     </div>
 
     <div class="flex h gap fit align flex_blured">
-        <a href="{{ route('login') }}" class="b-text">Войти</a>
+        <a href="{{ route('login') }}" class="b-text">Личный кабинет</a>
         <color-scheme-switcher id="lightModeSwitcher" mode="horizontal">
             <div class="flex h100 w100 h space-btw align">
                 <svg class="b-img b-img_sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="brightness"
@@ -33,24 +33,19 @@
             <div class="toggle-circle"></div>
         </color-scheme-switcher>
 
-        <a wire:ignore href="{{ route('main') }}" class="cr-button">
-            @if (request()->is('/'))
-                <i class="reload-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-                        <path fill-rule="evenodd"
-                            d="M21,11a1,1,0,0,0-1,1,8.05,8.05,0,1,1-2.22-5.5h-2.4a1,1,0,0,0,0,2h4.53a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4.77A10,10,0,1,0,22,12,1,1,0,0,0,21,11Z"
-                            clip-rule="evenodd"></path>
-                    </svg>
-                </i>
-            @else
-                <i class="close-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 12 12">
-                        <path fill-rule="evenodd"
-                            d="M1.707.293A1 1 0 0 0 .293 1.707L4.586 6 .293 10.293a1 1 0 1 0 1.414 1.414L6 7.414l4.293 4.293a1 1 0 0 0 1.414-1.414L7.414 6l4.293-4.293A1 1 0 0 0 10.293.293L6 4.586 1.707.293Z"
-                            clip-rule="evenodd"></path>
-                    </svg>
-                </i>
+        <div wire:ignore>
+            @if (!request()->is('/'))
+                <a href="{{ route('main') }}" class="cr-button">
+                    <i class="close-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 12 12">
+                            <path fill-rule="evenodd"
+                                d="M1.707.293A1 1 0 0 0 .293 1.707L4.586 6 .293 10.293a1 1 0 1 0 1.414 1.414L6 7.414l4.293 4.293a1 1 0 0 0 1.414-1.414L7.414 6l4.293-4.293A1 1 0 0 0 10.293.293L6 4.586 1.707.293Z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </i>
+                </a>
             @endif
-        </a>
+        </div>
+
     </div>
 </header>
