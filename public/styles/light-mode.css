@@ -14,8 +14,8 @@ button,
 span,
 ::before,
 ::after {
-    transition-property: transform, filter, scale, color, background-color, opacity;
-    transition-duration: 0.25s;
+    transition-property: transform, filter, scale, color, background-color, opacity, box-shadow, border-color;
+    transition-duration: .25s;
     transition-timing-function: ease-in-out;
 }
 
@@ -50,10 +50,22 @@ body:has(.light-mode-applied) .text-header {
     color: #000;
 }
 
+body:has(.light-mode-applied) .b-img.b-img_v1a {
+    filter: invert(0);
+}
+
+body:has(.light-mode-applied) .b-text.b-text_v1.b-text_v1\.0 {
+    background-color: #FFF;
+}
 
 body:has(.light-mode-applied) h1 {
     color: #000;
 }
+
+body:has(.light-mode-applied) .b-section.b-section_v1 {
+    background: linear-gradient(97deg, #0d6efd 25%, #f6f7f8 0%);
+}
+
 
 body:has(.light-mode-applied) .b-section {
     background-color: #f6f7f8;
@@ -70,6 +82,12 @@ body:has(.light-mode-applied) .card_v3 {
 
 body:has(.light-mode-applied) .side-container {
     background-color: #ffffff;
+}
+
+body:has(.light-mode-applied) #custom-target-01:hover~.card_v1-danger {
+    filter: brightness(1);
+    filter: blur(0.5em);
+    background-color: rgba(224, 31, 25, .1) !important;
 }
 
 body:has(.light-mode-applied) .card.card_v2 {

@@ -1,0 +1,11 @@
+Model Information:
+* title:	Gold Bar Low Poly
+* source:	https://sketchfab.com/3d-models/gold-bar-low-poly-92b6818cb65542d683f3f71d55fe48c3
+* author:	NataN (https://sketchfab.com/NataN-0)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Gold Bar Low Poly" (https://sketchfab.com/3d-models/gold-bar-low-poly-92b6818cb65542d683f3f71d55fe48c3) by NataN (https://sketchfab.com/NataN-0) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

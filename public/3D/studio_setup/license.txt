@@ -1,0 +1,11 @@
+Model Information:
+* title:	Studio Setup
+* source:	https://sketchfab.com/3d-models/studio-setup-471621d9eee9427b925f6390f906754a
+* author:	Render Blue (https://sketchfab.com/pablojcd)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Studio Setup" (https://sketchfab.com/3d-models/studio-setup-471621d9eee9427b925f6390f906754a) by Render Blue (https://sketchfab.com/pablojcd) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

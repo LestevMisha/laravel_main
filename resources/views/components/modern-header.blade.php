@@ -11,7 +11,7 @@
     </div>
 
     <div class="flex h gap fit align flex_blured">
-        <a href="{{ route('login') }}" class="b-text">Личный кабинет</a>
+        <a href="{{ route('login') }}" class="b-text b-text_right">Личный кабинет</a>
         <color-scheme-switcher id="lightModeSwitcher" mode="horizontal">
             <div class="flex h100 w100 h space-btw align">
                 <svg class="b-img b-img_sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="brightness"
