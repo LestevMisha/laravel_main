@@ -16,6 +16,7 @@ class TelegramController extends Controller
     public function handle()
     {
         logger("here");
+       
         $update = Telegram::commandsHandler(true);
         $user_id = $update["message"]["from"]["id"];
 
@@ -23,6 +24,8 @@ class TelegramController extends Controller
         $user = User::where("telegram_id", $user_id)?->first();
         if ($user) {
             $message = $update["message"]["text"];
+            logger($message);
+            logger(strpos($message, "start"));
 
             if (strpos($message, "/changeEmail")) {
                 $validator = Validator::make(["email" => $message], [
@@ -50,7 +53,10 @@ class TelegramController extends Controller
                     "text" => $text,
                     "parse_mode" => "MarkdownV2",
                 ]);
-            } else {
+            } else if (strpos($message, "start")) {
+                return;
+            }
+            else {
                 Telegram::sendMessage([
                     "chat_id" => $update["message"]["chat"]["id"],
                     "text" => "Доступные текущие комманды - /changeEmail",

@@ -22,7 +22,7 @@ class TelegramVerification extends Component
     public function getLink()
     {
         $tgService = new TelegramService();
-        return $tgService->getLink(Auth::user()->uuid, "telegram-verification");
+        return $tgService->getLink(Auth::user()->uuid);
     }
 
     public function deleteUser()

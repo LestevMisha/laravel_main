@@ -7,7 +7,7 @@
 
         <form wire:submit.default="nextStep" class="modern-form">
             @csrf
-            <div class="flex v w100">
+            <div class="flex static v w100">
                 @if ($currentStep >= 0)
                     <x-modern-input displayed="{{ $currentStep > 0 ? 'none' : 'block' }}" attr="name"
                         title="Ваше Имя" />

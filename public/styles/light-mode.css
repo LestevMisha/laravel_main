@@ -42,6 +42,10 @@ body:has(.light-mode-applied) .b-text {
     color: #000;
 }
 
+body:has(.light-mode-applied) .accordion .accordion-item {
+    background: #00000008;
+}
+
 body:has(.light-mode-applied) .b-circle {
     background-color: #c5c5c545;
 }
@@ -50,12 +54,21 @@ body:has(.light-mode-applied) .text-header {
     color: #000;
 }
 
-body:has(.light-mode-applied) .b-img.b-img_v1a {
-    filter: invert(0);
+body:has(.light-mode-applied) li {
+    color: #000;
 }
 
-body:has(.light-mode-applied) .b-text.b-text_v1.b-text_v1\.0 {
-    background-color: #FFF;
+body:has(.light-mode-applied) .hook {
+    background:
+        radial-gradient(farthest-side at -33.33% 50%, #0000 52%, #ffffff 54% 57%, #0000 59%) 0 calc(128px / 2),
+        radial-gradient(farthest-side at 50% 133.33%, #0000 52%, #ffffff 54% 57%, #0000 59%) calc(128px / 2) 0,
+        radial-gradient(farthest-side at 133.33% 50%, #0000 52%, #ffffff 54% 57%, #0000 59%),
+        radial-gradient(farthest-side at 50% -33.33%, #0000 52%, #ffffff 54% 57%, #0000 59%), #f7f7f7 !important;
+    background-size: calc(128px/4.667) 128px, 128px calc(128px/4.667) !important;
+}
+
+body:has(.light-mode-applied)  .b-text.b-text_blue-marker::before {
+    background-color: #88b8ff;
 }
 
 body:has(.light-mode-applied) h1 {
@@ -63,7 +76,7 @@ body:has(.light-mode-applied) h1 {
 }
 
 body:has(.light-mode-applied) .b-section.b-section_v1 {
-    background: linear-gradient(97deg, #0d6efd 25%, #f6f7f8 0%);
+    background: linear-gradient(97deg, #0d6efd 5%, #FFFFFF 40%);
 }
 
 
@@ -73,11 +86,6 @@ body:has(.light-mode-applied) .b-section {
 
 body:has(.light-mode-applied) .card {
     background-color: #f6f7f8;
-}
-
-body:has(.light-mode-applied) .card_v3 {
-    background-color: #c7c7c721;
-    backdrop-filter: blur(6px);
 }
 
 body:has(.light-mode-applied) .side-container {
@@ -99,7 +107,7 @@ body:has(.light-mode-applied) .overlay {
 }
 
 body:has(.light-mode-applied) .b-section.b-section_v2 {
-    background-color: #ffffff;
+    background: #ffffff;
 }
 
 body:has(.light-mode-applied) .b-img.b-img_v9 {

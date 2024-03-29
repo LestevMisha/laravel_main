@@ -94,6 +94,8 @@ class YooKassaController extends Controller
                 $tg = new TelegramController();
 
                 if (isset($metadata->transaction_id)) {
+                    logger($metadata->transaction_id);
+                    logger("1");
                     $transactionId = (int)$metadata->transaction_id;
 
                     // update transaction
@@ -103,7 +105,9 @@ class YooKassaController extends Controller
                     $transaction->save();
                     // user + 30 days
                     $user = User::where("uuid", $transaction->uuid)->first();
-                    $user->days_left = (int)$user->days_left + 30;
+                    if (!$user->is_paid_10K) {
+                        $user->days_left = (int)$user->days_left + 30;
+                    }
                     // check if user made first enterance payment, if so set his is_paid_10K status to 1 (true)
                     if (isset($metadata->is_paid_10K)) {
                         $user->is_paid_10K = $metadata->is_paid_10K;
@@ -115,6 +119,7 @@ class YooKassaController extends Controller
 
                 // handle recurrent payments
                 if ($metadata->isRecurrent) {
+
                     // add to database
                     $user = User::where("uuid", $metadata->uuid)->first();
                     $transaction = UsersTransactions::create([

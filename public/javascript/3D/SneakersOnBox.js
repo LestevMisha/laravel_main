@@ -66,18 +66,18 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             renderer.render(scene, camera);
-            composer.render();
+            // composer.render();
         }
 
 
         // finish up
-        const composer = new THREE.EffectComposer(renderer);
+        // const composer = new THREE.EffectComposer(renderer);
 
-        const renderPass = new THREE.RenderPass(scene, camera);
-        composer.addPass(renderPass);
+        // const renderPass = new THREE.RenderPass(scene, camera);
+        // composer.addPass(renderPass);
 
-        const glitchPass = new THREE.GlitchPass();
-        composer.addPass(glitchPass);
+        // const glitchPass = new THREE.GlitchPass();
+        // composer.addPass(glitchPass);
 
         anchorElement.appendChild(renderer.domElement);
         renderer.setAnimationLoop(animate);
@@ -98,9 +98,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const steps = document.querySelectorAll(".b-circle-wrapper");
     steps.forEach(step => {
+        const step_info = step.parentElement.querySelector(".hook");
+
         step.addEventListener("mouseenter", function () {
             var step_num = step.getAttribute("data-step");
-            console.log("hovered", step_num);
+            console.log("hovered", step_info, step_num);
+            step_info.classList.add("active");
 
             if (step_num == 1) {
                 if (current_step === 1) return;
@@ -123,6 +126,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 removeObject3D(gltfObject);
                 gltf_init('3D/gold_bar_low_poly/', 'scene.gltf', pivot, .5, -0.5, 5);
             }
+        });
+
+        step.addEventListener("mouseleave", function () {
+            step_info.classList.remove("active");
+
         });
     });
 });

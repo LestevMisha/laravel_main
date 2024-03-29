@@ -4,9 +4,9 @@ namespace App\Services;
 
 class TelegramService
 {
-    public function getLink($func, $uuid="none")
+    public function getLink($uuid="none")
     {
-        return "https://t.me/start_marathon_bot?start=" . $uuid . "_" . $func;
+        return "https://t.me/start_marathon_bot?start=" . $uuid;
     }
 
     public function markdownv2($text)
