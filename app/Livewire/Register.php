@@ -105,6 +105,10 @@ class Register extends Component
     {
         // keep entered user's data
         $this->currentStep = session()->get("currentStep", 0);
+        // if any bug or anything fix it using this rule
+        if ($this->currentStep < 0 || $this->currentStep > 2) {
+            $this->currentStep = 0;
+        }
         $this->name = session()->get("name", "");
         $this->email = session()->get("email", "");
         $this->password = session()->get("password", "");

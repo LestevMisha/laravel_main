@@ -11,8 +11,11 @@
                 <x-modern-error />
                 <button class="go-button v1">Войти</button>
                 <div class="flex h mt-24px space-btw">
-                    <x-modern-remember />
-                        <a class="text-15px" href="{{ route('password.forgot') }}">Забыли Пароль?</a>
+                    <div class="flex h align">
+                        <input wire:model="remember" type="checkbox" value="remember-me" id="flexCheckDefault">
+                        <label class="text-remember" for="flexCheckDefault">Запомнить меня</label>
+                    </div>
+                    <a class="text-15px" href="{{ route('password.forgot') }}">Забыли Пароль?</a>
                 </div>
                 <a class="text-15px mt-05" href="{{ route('register') }}">Регистрация</a>
 

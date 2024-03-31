@@ -1,4 +1,4 @@
-<div> <!-- 750 before optim -->
+<div>
     <section class="b-section b-section_v1">
         <div class="overlay"></div>
         <img src="{{ URL::asset('images/min-png/sneakers-chair.png') }}" class="b-img b-img_v2" alt="sneakers-chair"
@@ -168,7 +168,7 @@
                         </div>
                     </div>
                     <div class="b-text b-text_1.3em b-text_700">Итого: 3 770 000 руб.</div>
-                    <img src="{{ URL::asset('images/svg/RedCross.svg') }}" class="b-img b-img_cross-thick"
+                    <img src="{{ URL::asset('images/svg/img-case/RedCross.svg') }}" class="b-img b-img_cross-thick"
                         alt="RedCross" loading="lazy">
                 </div>
             </div>
@@ -194,8 +194,8 @@
                             <div class="b-text b-text_700 b-text_center b-text_v1 b-text_v1.0 b">
                                 ШАГ<br>1
                             </div>
-                            <img src="{{ URL::asset('images/disk-silver.png') }} " alt="abstract-circle"
-                                class="b-img b-img_v1a">
+                            <img src="{{ URL::asset('images/test/disk-silver.png') }}" class="b-img b-img_v1a"
+                                alt="abstract-circle" loading="lazy">
                         </div>
                         <div class="hook">
                             <div class="b-text b-text_1.5em b-text_center mb-1">
@@ -221,14 +221,14 @@
                             </div>
                         </div>
                     </div>
-                    <img class="arrow-step-icon" src="{{ URL::asset('images/svg/GradientArrow.svg') }}" alt="GradientArrow">
+                    <x-svg-gradient class="arrow-step-icon" svg="GradientArrow" />
                     <div class="relative hooked">
                         <div class="b-circle-wrapper" data-step="2">
                             <div class="b-text b-text_700 b-text_center b-text_v1 b-text_v1.0 b">
                                 ШАГ<br>2
                             </div>
-                            <img src="{{ URL::asset('images/disk-silver.png') }} " alt="abstract-circle"
-                                class="b-img b-img_v1a">
+                            <img src="{{ URL::asset('images/test/disk-silver.png') }}" class="b-img b-img_v1a"
+                                alt="abstract-circle" loading="lazy">
                         </div>
                         <div class="hook">
                             <div class="b-text b-text_1.5em b-text_center mb-1">
@@ -242,14 +242,14 @@
                             </div>
                         </div>
                     </div>
-                    <img class="arrow-step-icon" src="{{ URL::asset('images/svg/GradientArrow.svg') }}" alt="GradientArrow">
+                    <x-svg-gradient class="arrow-step-icon" svg="GradientArrow" />
                     <div class="relative hooked">
                         <div class="b-circle-wrapper" data-step="3">
                             <div class="b-text b-text_700 b-text_center b-text_v1 b-text_v1.0 b">
                                 ШАГ<br>3
                             </div>
-                            <img src="{{ URL::asset('images/disk-silver.png') }} " alt="abstract-circle"
-                                class="b-img b-img_v1a">
+                            <img src="{{ URL::asset('images/test/disk-silver.png') }}"class="b-img b-img_v1a"
+                                alt="abstract-circle" loading="lazy">
                         </div>
                         <div class="hook">
                             <div class="b-text b-text_1.5em b-text_center mb-1">
@@ -263,14 +263,14 @@
                             </div>
                         </div>
                     </div>
-                    <img class="arrow-step-icon" src="{{ URL::asset('images/svg/GradientArrow.svg') }}" alt="GradientArrow">
+                    <x-svg-gradient class="arrow-step-icon" svg="GradientArrow" />
                     <div class="relative hooked">
                         <div class="b-circle-wrapper" data-step="4">
                             <div class="b-text b-text_700 b-text_center b-text_v1 b-text_v1.0 b">
                                 ШАГ<br>4
                             </div>
-                            <img src="{{ URL::asset('images/disk-silver.png') }} " alt="abstract-circle"
-                                class="b-img b-img_v1a">
+                            <img src="{{ URL::asset('images/test/disk-silver.png') }} " class="b-img b-img_v1a"
+                                alt="abstract-circle" loading="lazy">
                         </div>
                         <div class="hook">
                             <div class="b-text b-text_1.5em b-text_center mb-1">
@@ -283,7 +283,7 @@
                                 INFO END...
                             </div>
                         </div>
-                        <img class="arrow-step-icon abs" src="{{ URL::asset('images/svg/GradientArrowVertical.svg') }}" alt="GradientArrow">
+                        <x-svg-gradient class="arrow-step-icon abs" svg="GradientArrowVertical" />
                     </div>
                 </div>
                 <div class="flex h v5">
@@ -292,8 +292,8 @@
                             <div class="b-text b-text_700 b-text_center b-text_v1 b-text_v1.0 w">
                                 ШАГ<br>9
                             </div>
-                            <img src="{{ URL::asset('images/pixles.png') }} " alt="abstract-circle"
-                                class="b-img b-img_v1a">
+                            <img src="{{ URL::asset('images/test/pixles.png') }}" class="b-img b-img_v1a"
+                                alt="abstract-circle" loading="lazy">
                         </div>
                         <div class="hook">
                             <div class="b-text b-text_1.5em b-text_center mb-1">
@@ -307,14 +307,14 @@
                             </div>
                         </div>
                     </div>
-                    <img class="arrow-step-icon reverse" src="{{ URL::asset('images/svg/GradientArrow.svg') }}" alt="GradientArrow">
+                    <x-svg-gradient class="arrow-step-icon reverse" svg="GradientArrow" />
                     <div class="relative hooked">
                         <div class="b-circle-wrapper" data-step="8">
                             <div class="b-text b-text_700 b-text_center b-text_v1 b-text_v1.0 w">
                                 ШАГ<br>8
                             </div>
-                            <img src="{{ URL::asset('images/purple-circle.jpeg') }} " alt="abstract-circle"
-                                class="b-img b-img_v1a">
+                            <img src="{{ URL::asset('images/test/purple-circle.jpeg') }}" class="b-img b-img_v1a"
+                                alt="abstract-circle" loading="lazy">
                         </div>
                         <div class="hook">
                             <div class="b-text b-text_1.5em b-text_center mb-1">
@@ -328,15 +328,15 @@
                             </div>
                         </div>
                     </div>
-                    <img class="arrow-step-icon reverse" src="{{ URL::asset('images/svg/GradientArrow.svg') }}" alt="GradientArrow">
+                    <x-svg-gradient class="arrow-step-icon reverse" svg="GradientArrow" />
                     <div class="relative hooked">
                         <div class="b-circle-wrapper" data-step="7">
                             <div class="b-text b-text_700 b-text_center b-text_v1 b-text_v1.0 b"
                                 style="background-color: #0d6efd52;">
                                 ШАГ<br>7
                             </div>
-                            <img src="{{ URL::asset('images/maxresdefault.png') }} " alt="abstract-circle"
-                                class="b-img b-img_v1a">
+                            <img src="{{ URL::asset('images/test/maxresdefault.png') }}" class="b-img b-img_v1a"
+                                alt="abstract-circle" loading="lazy">
                         </div>
                         <div class="hook">
                             <div class="b-text b-text_1.5em b-text_center mb-1">
@@ -350,7 +350,7 @@
                             </div>
                         </div>
                     </div>
-                    <img class="arrow-step-icon reverse" src="{{ URL::asset('images/svg/GradientArrow.svg') }}" alt="GradientArrow">
+                    <x-svg-gradient class="arrow-step-icon reverse" svg="GradientArrow" />
                     <div class="relative hooked">
                         <div class="b-circle-wrapper" data-step="6">
                             <div class="b-text b-text_700 b-text_center b-text_v1 b-text_v1.0 b"
@@ -360,8 +360,8 @@
                         ">
                                 ШАГ<br>6
                             </div>
-                            <img src="{{ URL::asset('images/disk.png') }} " alt="abstract-circle"
-                                class="b-img b-img_v1a">
+                            <img src="{{ URL::asset('images/test/disk.png') }}" class="b-img b-img_v1a"
+                                alt="abstract-circle" loading="lazy">
                         </div>
                         <div class="hook">
                             <div class="b-text b-text_1.5em b-text_center mb-1">
@@ -375,14 +375,14 @@
                             </div>
                         </div>
                     </div>
-                    <img class="arrow-step-icon reverse" src="{{ URL::asset('images/svg/GradientArrow.svg') }}" alt="GradientArrow">
+                    <x-svg-gradient class="arrow-step-icon reverse" svg="GradientArrow" />
                     <div class="relative hooked">
                         <div class="b-circle-wrapper" data-step="5">
                             <div class="b-text b-text_700 b-text_center b-text_v1 b-text_v1.0 w">
                                 ШАГ<br>5
                             </div>
-                            <img src="{{ URL::asset('images/disk.gif') }} " alt="abstract-circle"
-                                class="b-img b-img_v1a">
+                            <img src="{{ URL::asset('images/test/disk.gif') }} " alt="abstract-circle"
+                                class="b-img b-img_v1a" loading="lazy">
                         </div>
                         <div class="hook">
                             <div class="b-text b-text_1.5em b-text_center mb-1">
@@ -397,60 +397,27 @@
                         </div>
                     </div>
                 </div>
-                <i class="serpent-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="300" height="98" viewBox="0 0 300 98"
-                        fill="none">
-                        <mask id="path-1-inside-1_26_10" fill="white">
-                            <path
-                                d="M64 21.5C64 9.62588 73.6259 0 85.5 0H114V43H85.5C73.6259 43 64 33.3741 64 21.5V21.5Z" />
-                        </mask>
-                        <path
-                            d="M63 21.5C63 9.07359 73.0736 -1 85.5 -1H114V1H85.5C74.1782 1 65 10.1782 65 21.5H63ZM114 44H85.5C73.0736 44 63 33.9264 63 21.5H65C65 32.8218 74.1782 42 85.5 42H114V44ZM85.5 44C73.0736 44 63 33.9264 63 21.5C63 9.07359 73.0736 -1 85.5 -1V1C74.1782 1 65 10.1782 65 21.5C65 32.8218 74.1782 42 85.5 42V44ZM114 0V43V0Z"
-                            fill="black" mask="url(#path-1-inside-1_26_10)" />
-                        <mask id="path-3-inside-2_26_10" fill="white">
-                            <path
-                                d="M0 76.5C0 64.6259 9.62588 55 21.5 55H50V98H21.5C9.62588 98 0 88.3741 0 76.5V76.5Z" />
-                        </mask>
-                        <path
-                            d="M-1 76.5C-1 64.0736 9.07359 54 21.5 54H50V56H21.5C10.1782 56 1 65.1782 1 76.5H-1ZM50 99H21.5C9.07359 99 -1 88.9264 -1 76.5H1C1 87.8218 10.1782 97 21.5 97H50V99ZM21.5 99C9.07359 99 -1 88.9264 -1 76.5C-1 64.0736 9.07359 54 21.5 54V56C10.1782 56 1 65.1782 1 76.5C1 87.8218 10.1782 97 21.5 97V99ZM50 55V98V55Z"
-                            fill="black" mask="url(#path-3-inside-2_26_10)" />
-                        <mask id="path-5-inside-3_26_10" fill="white">
-                            <path d="M250 0H278C290.15 0 300 9.84974 300 22V50H250V0Z" />
-                        </mask>
-                        <path
-                            d="M250 -1H278C290.703 -1 301 9.29745 301 22H299C299 10.402 289.598 1 278 1H250V-1ZM300 50H250H300ZM250 50V0V50ZM278 -1C290.703 -1 301 9.29745 301 22V50H299V22C299 10.402 289.598 1 278 1V-1Z"
-                            fill="black" mask="url(#path-5-inside-3_26_10)" />
-                        <mask id="path-7-inside-4_26_10" fill="white">
-                            <path d="M300 50V76C300 88.1503 290.15 98 278 98H250V50H300Z" />
-                        </mask>
-                        <path
-                            d="M301 50V76C301 88.7025 290.703 99 278 99V97C289.598 97 299 87.598 299 76V50H301ZM250 98V50V98ZM250 50H300H250ZM301 76C301 88.7025 290.703 99 278 99H250V97H278C289.598 97 299 87.598 299 76H301Z"
-                            fill="black" mask="url(#path-7-inside-4_26_10)" />
-                        <mask id="path-9-inside-5_26_10" fill="white">
-                            <path
-                                d="M250 42H251C254.866 42 258 45.134 258 49V49C258 52.866 254.866 56 251 56H250V42Z" />
-                        </mask>
-                        <path
-                            d="M250 41H251C255.418 41 259 44.5817 259 49H257C257 45.6863 254.314 43 251 43H250V41ZM259 49C259 53.4183 255.418 57 251 57H250V55H251C254.314 55 257 52.3137 257 49H259ZM250 56V42V56ZM251 41C255.418 41 259 44.5817 259 49C259 53.4183 255.418 57 251 57V55C254.314 55 257 52.3137 257 49C257 45.6863 254.314 43 251 43V41Z"
-                            fill="black" mask="url(#path-9-inside-5_26_10)" />
-                        <line x1="114" y1="42.5" x2="250" y2="42.5" stroke="black" />
-                        <line x1="50" y1="55.5" x2="250" y2="55.5" stroke="black" />
-                        <line x1="50" y1="97.5" x2="250" y2="97.5" stroke="black" />
-                        <line x1="114" y1="0.5" x2="250" y2="0.5" stroke="black" />
-                    </svg>
-                </i>
+                <img src="{{ URL::asset('images/svg/img-case/Serpent.svg') }}" alt="serpent-icon" class="serpent-icon"
+                    loading="lazy">
             </div>
-
             <div class="b-text b-text_2.5em b-text_700 b-text_center py-3">ПРАЙС-ЛИСТ</div>
             <div wire:ignore class="slider mb-3">
-                <img src="{{ URL::asset('images/price-list/sn1.jpg') }}" alt="sn1" class="b-img b-img_v5">
-                <img src="{{ URL::asset('images/price-list/sn2.jpg') }}" alt="sn2" class="b-img b-img_v5">
-                <img src="{{ URL::asset('images/price-list/sn3.jpg') }}" alt="sn3" class="b-img b-img_v5">
-                <img src="{{ URL::asset('images/price-list/sn4.jpg') }}" alt="sn4" class="b-img b-img_v5">
-                <img src="{{ URL::asset('images/price-list/sn5.jpg') }}" alt="sn5" class="b-img b-img_v5">
-                <img src="{{ URL::asset('images/price-list/sn6.jpg') }}" alt="sn6" class="b-img b-img_v5">
-                <img src="{{ URL::asset('images/price-list/sn7.jpg') }}" alt="sn7" class="b-img b-img_v5">
-                <img src="{{ URL::asset('images/price-list/sn8.jpg') }}" alt="sn8" class="b-img b-img_v5">
+                <img src="{{ URL::asset('images/jpeg/price-list/sn1.jpg') }}" class="b-img b-img_v5" alt="sn1"
+                    loading="lazy">
+                <img src="{{ URL::asset('images/jpeg/price-list/sn2.jpg') }}" class="b-img b-img_v5" alt="sn2"
+                    loading="lazy">
+                <img src="{{ URL::asset('images/jpeg/price-list/sn3.jpg') }}" class="b-img b-img_v5" alt="sn3"
+                    loading="lazy">
+                <img src="{{ URL::asset('images/jpeg/price-list/sn4.jpg') }}" class="b-img b-img_v5" alt="sn4"
+                    loading="lazy">
+                <img src="{{ URL::asset('images/jpeg/price-list/sn5.jpg') }}" class="b-img b-img_v5" alt="sn5"
+                    loading="lazy">
+                <img src="{{ URL::asset('images/jpeg/price-list/sn6.jpg') }}" class="b-img b-img_v5" alt="sn6"
+                    loading="lazy">
+                <img src="{{ URL::asset('images/jpeg/price-list/sn7.jpg') }}" class="b-img b-img_v5" alt="sn7"
+                    loading="lazy">
+                <img src="{{ URL::asset('images/jpeg/price-list/sn8.jpg') }}" class="b-img b-img_v5" alt="sn8"
+                    loading="lazy">
             </div>
         </div>
     </section>
@@ -543,5 +510,4 @@
             </div>
         </div>
     </section>
-
 </div>
