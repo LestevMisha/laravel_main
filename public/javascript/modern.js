@@ -41,7 +41,6 @@ document.addEventListener('livewire:initialized', () => {
             if (content_len > showChar) {
                 var c = content.substr(0, showChar);
                 var h = content.substr(showChar, content_len - showChar);
-                console.log(h)
                 var html = c + '<span class="moreellipses">' + ellipsestext + '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="" class="morelink">' + moretext + '</a></span>';
                 $(this).html(html);
             }
@@ -83,8 +82,7 @@ document.addEventListener('livewire:initialized', () => {
 
     // helper function
     const debouncedEyeFunc = debounce((el) => {
-        console.log(el, "here");
-        const modernWrappers = el.closest("form").querySelectorAll(".modern-wrapper") ?? null;
+        const modernWrappers = el.closest("form")?.querySelectorAll(".modern-wrapper") ?? null;
         if (modernWrappers) {
             modernWrappers.forEach(moderWrapper => {
                 if (moderWrapper.style.display !== "none") {
