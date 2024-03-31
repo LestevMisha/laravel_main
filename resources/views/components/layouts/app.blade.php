@@ -42,6 +42,7 @@
     <div class="flex w100 h100">
         <livewire:light-mode-on menu_type="top" />
         {{ $slot }}
+        
     </div>
 
     <!-- +++++++++++ CDNs +++++++++++ -->
