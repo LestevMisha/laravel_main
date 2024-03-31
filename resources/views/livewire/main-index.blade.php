@@ -178,7 +178,7 @@
     <section class="b-section b-section_v3 zi1">
         <x-svg class="b-img b-img_v7" svg="NikePair" />
         <div class="container container_v2 mob">
-            <div class="py-3">
+            {{-- <div class="py-3">
                 <div class="glitch-wrapper">
                     <div class="b-text b-text_2em b-text_700 b-text_right glitch custom_media_size_change"
                         data-text="                ?">
@@ -399,24 +399,24 @@
                 </div>
                 <img src="{{ URL::asset('images/svg/img-case/Serpent.svg') }}" alt="serpent-icon" class="serpent-icon"
                     loading="lazy">
-            </div>
+            </div> --}}
             <div class="b-text b-text_2.5em b-text_700 b-text_center py-3">ПРАЙС-ЛИСТ</div>
             <div wire:ignore class="slider mb-3">
-                <img src="{{ URL::asset('images/jpeg/price-list/sn1.jpg') }}" class="b-img b-img_v5" alt="sn1"
+                <img src="{{ URL::asset('images/jpeg/price-list/sn1.jpg') }}" class="b-img b-img_v5" type="image/jpeg" alt="sn1"
                     loading="lazy">
-                <img src="{{ URL::asset('images/jpeg/price-list/sn2.jpg') }}" class="b-img b-img_v5" alt="sn2"
+                <img src="{{ URL::asset('images/jpeg/price-list/sn2.jpg') }}" class="b-img b-img_v5" type="image/jpeg" alt="sn2"
                     loading="lazy">
-                <img src="{{ URL::asset('images/jpeg/price-list/sn3.jpg') }}" class="b-img b-img_v5" alt="sn3"
+                <img src="{{ URL::asset('images/jpeg/price-list/sn3.jpg') }}" class="b-img b-img_v5" type="image/jpeg" alt="sn3"
                     loading="lazy">
-                <img src="{{ URL::asset('images/jpeg/price-list/sn4.jpg') }}" class="b-img b-img_v5" alt="sn4"
+                <img src="{{ URL::asset('images/jpeg/price-list/sn4.jpg') }}" class="b-img b-img_v5" type="image/jpeg" alt="sn4"
                     loading="lazy">
-                <img src="{{ URL::asset('images/jpeg/price-list/sn5.jpg') }}" class="b-img b-img_v5" alt="sn5"
+                <img src="{{ URL::asset('images/jpeg/price-list/sn5.jpg') }}" class="b-img b-img_v5" type="image/jpeg" alt="sn5"
                     loading="lazy">
-                <img src="{{ URL::asset('images/jpeg/price-list/sn6.jpg') }}" class="b-img b-img_v5" alt="sn6"
+                <img src="{{ URL::asset('images/jpeg/price-list/sn6.jpg') }}" class="b-img b-img_v5" type="image/jpeg" alt="sn6"
                     loading="lazy">
-                <img src="{{ URL::asset('images/jpeg/price-list/sn7.jpg') }}" class="b-img b-img_v5" alt="sn7"
+                <img src="{{ URL::asset('images/jpeg/price-list/sn7.jpg') }}" class="b-img b-img_v5" type="image/jpeg" alt="sn7"
                     loading="lazy">
-                <img src="{{ URL::asset('images/jpeg/price-list/sn8.jpg') }}" class="b-img b-img_v5" alt="sn8"
+                <img src="{{ URL::asset('images/jpeg/price-list/sn8.jpg') }}" class="b-img b-img_v5" type="image/jpeg" alt="sn8"
                     loading="lazy">
             </div>
         </div>

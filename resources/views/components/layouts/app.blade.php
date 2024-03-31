@@ -6,20 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ $title ?? 'КЛУБ START' }}</title>
 
+    <!-- +++++++++++ PROJECT CSS +++++++++++ -->
+    <link href="{{ secure_asset('styles/different-components.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ secure_asset('styles/main.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ secure_asset('styles/light-mode.css') }}" type="text/css" rel="stylesheet">
+    {{-- slick slider --}}
+    <link href="{{ secure_asset('styles/slick-slider.css') }}" type="text/css" rel="stylesheet">
+    {{-- glitch effect --}}
+    <link href="{{ secure_asset('styles/glitch.css') }}" type="text/css" rel="stylesheet">
+    {{-- accordion --}}
+    <link href="{{ secure_asset('styles/accordion.css') }}" type="text/css" rel="stylesheet">
+
     <!-- +++++++++++ CDNs +++++++++++ -->
     {{-- slick slider --}}
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link defer rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 
-    <!-- +++++++++++ PROJECT CSS +++++++++++ -->
-    <link href="{{ secure_asset('styles/different-components.css') }}" rel="stylesheet">
-    <link href="{{ secure_asset('styles/main.css') }}" rel="stylesheet">
-    <link href="{{ secure_asset('styles/light-mode.css') }}" rel="stylesheet">
-    {{-- slick slider --}}
-    <link href="{{ secure_asset('styles/slick-slider.css') }}" rel="stylesheet">
-    {{-- glitch effect --}}
-    <link href="{{ secure_asset('styles/glitch.css') }}" rel="stylesheet">
-    {{-- accordion --}}
-    <link href="{{ secure_asset('styles/accordion.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -45,41 +46,12 @@
 
     <!-- +++++++++++ CDNs +++++++++++ -->
     {{-- jQuery/Mask jQuery --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     {{--  slick slider  --}}
-    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-    {{-- Three js --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r126/three.min.js"
-        integrity="sha512-n8IpKWzDnBOcBhRlHirMZOUvEq2bLRMuJGjuVqbzUJwtTsgwOgK5aS0c1JA647XWYfqvXve8k3PtZdzpipFjgg=="
-        crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/three@0.126.0/examples/js/loaders/GLTFLoader.js"></script>
-    <script src="https://unpkg.com/three@0.126.0/examples/js/controls/OrbitControls.js"></script>
-
-    {{-- post-rendering --}}
-    <script src="https://unpkg.com/three@0.126.0/examples/js/postprocessing/EffectComposer.js"></script>
-    <script src="https://unpkg.com/three@0.126.0/examples/js/postprocessing/ShaderPass.js"></script>
-    <script src="https://unpkg.com/three@0.126.0/examples/js/postprocessing/RenderPass.js"></script>
-    <script src="https://unpkg.com/three@0.126.0/examples/js/postprocessing/OutputPass.js"></script>
-    <script src="https://unpkg.com/three@0.126.0/examples/js/postprocessing/FilmPass.js"></script>
-    <script src="https://unpkg.com/three@0.126.0/examples/js/postprocessing/GlitchPass.js"></script>
-    <script src="https://unpkg.com/three@0.126.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
-    <script src="https://unpkg.com/three@0.126.0/examples/js/postprocessing/DotScreenPass.js"></script>
-    <script src="https://unpkg.com/three@0.126.0/examples/js/postprocessing/BloomPass.js"></script>
-    <script src="https://unpkg.com/three@0.126.0/examples/js/postprocessing/FilmPass.js"></script>
-
-    <script src="https://unpkg.com/three@0.126.0/examples/js/shaders/ConvolutionShader.js"></script>
-    <script src="https://unpkg.com/three@0.126.0/examples/js/shaders/FilmShader.js"></script>
-    <script src="https://unpkg.com/three@0.126.0/examples/js/shaders/DigitalGlitch.js"></script>
-    <script src="https://unpkg.com/three@0.126.0/examples/js/shaders/CopyShader.js"></script>
-    <script src="https://unpkg.com/three@0.126.0/examples/js/shaders/SobelOperatorShader.js"></script>
-    <script src="https://unpkg.com/three@0.126.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
-    <script src="https://unpkg.com/three@0.126.0/examples/js/shaders/LuminosityShader.js"></script>
-    <script src="https://unpkg.com/three@0.126.0/examples/js/shaders/ColorifyShader.js"></script>
-
-
+    <script defer type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <!-- +++++++++++ PROJECT JAVASCRIPT +++++++++++ -->
     <script src="{{ secure_asset('javascript/light-mode.js') }}"></script>
     {{-- clipboard copy --}}
@@ -89,11 +61,24 @@
     {{-- slick slider --}}
     <script src="{{ URL::asset('javascript/slick-slider.js') }}"></script>
     {{-- Three js --}}
-    <script src="{{ URL::asset('javascript/3D/NikeAirMag.js') }}"></script>
+    <script type="importmap">
+        {
+          "imports": {
+            "three": "./javascript/3D/three.js/build/three.module.js"
+          }
+        }
+    </script>
+    <script type="module" src="{{ URL::asset('javascript/3D/NikeAirMag.js') }}"></script>
     <script src="{{ URL::asset('javascript/3D/SneakersOnBox.js') }}"></script>
     {{-- Accordion --}}
     <script src="{{ URL::asset('javascript/accordion.js') }}"></script>
-
+    <!-- Fix jQuery [Violation] non-passive event (support https://github.com/ignasdamunskis/passive-events-support) -->
+    <script>
+        window.passiveSupport = {
+            events: ['touchstart', 'touchmove']
+        }
+    </script>
+    <script type="module" src="{{ URL::asset('javascript/passive-events-support/dist/main.js') }}"></script>
 
 </body>
 
