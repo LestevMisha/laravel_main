@@ -17,4 +17,4 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
-/public/javascript/3D/three.js
+/public/javascript/3D/three.js/
