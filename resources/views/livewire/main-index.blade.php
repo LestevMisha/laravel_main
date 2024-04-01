@@ -1,5 +1,5 @@
 <div>
-    
+    {{-- change --}}
     <section class="b-section b-section_v1">
         <div class="overlay"></div>
         <img src="{{ URL::asset('images/min-png/sneakers-chair.png') }}" class="b-img b-img_v2" alt="sneakers-chair"
